@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/classic/classic",
+    "components/like/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "旧岛小样",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#fff"
+  }
+}

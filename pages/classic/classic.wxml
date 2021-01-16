@@ -1,0 +1,6 @@
+<!--pages/classic/classic.wxml-->
+<text>
+  index.wxml
+</text>
+
+<v-like />
