@@ -7,5 +7,6 @@
     "navigationBarTitleText": "旧岛小样",
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#fff"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

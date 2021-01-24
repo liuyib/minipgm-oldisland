@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -42,7 +42,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
   "appid": "wxb553e61fb3c2de00",
-  "projectname": "7yue-no-cloud",
+  "projectname": "minipgm-oldisland",
   "debugOptions": {
     "hidedInDevtools": []
   },

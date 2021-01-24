@@ -12,7 +12,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // FIXME: 401，没有权限
+    wx.request({
+      url: 'http://bl.talelin.com/v1/classic/latest',
+      header: {
+        appkey: '98HcsgdJ3mx4Ufcm',
+      }
+    })
   },
 
   /**

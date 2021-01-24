@@ -1,5 +1,10 @@
 /* components/like/index.wxss */
-.container {}
+.container {
+  display: inline-flex;
+  position: relative;
+  width: 32rpx;
+  padding: 10rpx 0;
+}
 
 .container image {
   width: 32rpx;
@@ -7,6 +12,10 @@
 }
 
 .container text {
-  font-size: 48rpx;
+  position: absolute;
+  bottom: 28rpx;
+  left: 38rpx;
+  line-height: 24rpx;
+  font-size: 24rpx;
   color: #bbb;
 }
