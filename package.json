@@ -1,0 +1,24 @@
+{
+  "name": "minipgm-oldisland",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liuyib/minipgm-oldisland.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liuyib/minipgm-oldisland/issues"
+  },
+  "homepage": "https://github.com/liuyib/minipgm-oldisland",
+  "dependencies": {
+    "js-base64": "^3.6.0",
+    "lin-ui": "^0.9.4"
+  }
+}
