@@ -10,24 +10,26 @@ class TokenModel extends HTTP {
     const token = wx.getStorageSync('token')
 
     if (token) {
-      this._verifyTokenFromServer()
+      this._verifyFromServer()
     } else {
-      this._getTokenFromServer()
+      this._getFromServer()
     }
   }
 
   /**
    * 从服务器获取 Token
    * @api private
+   * @param {Object} [option]           - 可选参数
+   * @param {Function} [option.success] - 成功回调
    * @returns
    */
-  _getTokenFromServer() {
-    const that = this
+  _getFromServer({ success } = {}) {
+    const _this = this
 
     wx.login({
       success(res) {
         if (res.code) {
-          that.request({
+          _this.request({
             uri: '/token',
             method: 'POST',
             data: {
@@ -37,6 +39,10 @@ class TokenModel extends HTTP {
             },
           }).then((res) => {
             wx.setStorageSync('token', res.data)
+
+            if (typeof success === 'function') {
+              success()
+            }
           }).catch((err) => {
             wx.showToast({
               title: err,
@@ -49,23 +55,19 @@ class TokenModel extends HTTP {
   }
 
   /**
-   * 从服务器验证 Token
+   * 从服务器验证 Token。如果验证失败，则重新获取一次
    * @api private
    * @returns
    */
-  _verifyTokenFromServer() {
+  _verifyFromServer() {
     this.request({
       uri: '/token/verify',
       method: 'POST',
       data: {
         token: wx.getStorageSync('token'),
       },
-    }).catch((err) => {
-      wx.showToast({
-        title: `${err}，请登录`,
-        icon: 'none',
-        duration: 3000,
-      })
+    }).catch(() => {
+      this._getFromServer()
     })
   }
 
