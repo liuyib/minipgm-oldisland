@@ -1,6 +1,7 @@
 const { Base64 } = require('js-base64')
 const { config } = require('../config')
 const { urlResolve } = require('./util')
+const { TokenModel } = require('../models/token')
 
 class HTTP {
   /**
@@ -43,7 +44,6 @@ class HTTP {
     uri,
     method = 'GET',
     data = {},
-    // TODO: 无感知获取令牌
     isRefreshToken = true,
     resolve,
     reject,
@@ -68,9 +68,20 @@ class HTTP {
       header,
       success: (res) => {
         const { code, msg } = res.data
+        const statusCode = res.statusCode
 
         if (code === 0) {
           resolve(res.data)
+        } else if (statusCode === 403) {
+          if (isRefreshToken) {
+            this._refresh({
+              uri,
+              method,
+              data,
+              resolve,
+              reject,
+            })
+          }
         } else {
           reject(msg)
         }
@@ -82,13 +93,19 @@ class HTTP {
   }
 
   /**
-   * TODO
    * 无感知刷新用户的登录令牌
    * @api private
    * @returns
    */
-  _refresh() {
+  _refresh(...param) {
+    const token = new TokenModel()
 
+    token.getFromServer(() => {
+      this._request({
+        ...param,
+        isRefreshToken: true,
+      })
+    })
   }
 
   /**

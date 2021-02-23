@@ -10,20 +10,20 @@ class TokenModel extends HTTP {
     const token = wx.getStorageSync('token')
 
     if (token) {
-      this._verifyFromServer()
+      this.verifyFromServer()
     } else {
-      this._getFromServer()
+      this.getFromServer()
     }
   }
 
   /**
    * 从服务器获取 Token
-   * @api private
+   * @api public
    * @param {Object} [option]           - 可选参数
    * @param {Function} [option.success] - 成功回调
    * @returns
    */
-  _getFromServer({ success } = {}) {
+  getFromServer({ success } = {}) {
     const _this = this
 
     wx.login({
@@ -56,10 +56,10 @@ class TokenModel extends HTTP {
 
   /**
    * 从服务器验证 Token。如果验证失败，则重新获取一次
-   * @api private
+   * @api public
    * @returns
    */
-  _verifyFromServer() {
+  verifyFromServer() {
     this.request({
       uri: '/token/verify',
       method: 'POST',
@@ -67,7 +67,7 @@ class TokenModel extends HTTP {
         token: wx.getStorageSync('token'),
       },
     }).catch(() => {
-      this._getFromServer()
+      this.getFromServer()
     })
   }
 
