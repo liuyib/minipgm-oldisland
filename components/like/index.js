@@ -24,11 +24,15 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onLike(ev) {
-      let { isLike, count } = this.properties;
-      isLike = !isLike;
-      count = isLike ? count + 1 : count - 1;
-      this.setData({ isLike, count })
+    onLike() {
+      const { isLike, count } = this.data
+      const newData = {
+        isLike: !isLike,
+        count: isLike ? count - 1 : count + 1,
+      }
+
+      this.setData(newData)
+      this.triggerEvent('like', { isLike }, {})
     }
   }
 })

@@ -1,6 +1,8 @@
 import { ClassicModel } from '../../models/classic'
+import { LikeModel } from '../../models/like'
 
 const classicModel = new ClassicModel()
+const likeModel = new LikeModel()
 
 // pages/classic/classic.js
 Page({
@@ -72,5 +74,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onLike: function (event) {
+    const { isLike } = event.detail
+    const { id, type } = this.data.classicData
+    const url = `/favor${isLike ? '/cancel' : ''}`
+
+    likeModel
+      .setLike({ url, id, type })
+      .then((res) => {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        })
+      })
   }
+
 })
