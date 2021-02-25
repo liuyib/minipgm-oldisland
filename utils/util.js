@@ -52,7 +52,7 @@ const urlResolve = (base, ...paths) => {
   return result
 }
 
-module.exports = {
+export {
   formatTime,
   urlResolve,
 }

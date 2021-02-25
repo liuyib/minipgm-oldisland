@@ -1,4 +1,4 @@
-const { TokenModel } = require('./models/token')
+import { TokenModel } from './models/token'
 
 App({
   onLaunch() {

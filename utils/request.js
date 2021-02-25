@@ -1,7 +1,7 @@
-const { Base64 } = require('js-base64')
-const { config } = require('../config')
-const { urlResolve } = require('./util')
-const { TokenModel } = require('../models/token')
+import { Base64 } from 'js-base64'
+import { config } from '../config'
+import { urlResolve } from './util'
+import { TokenModel } from '../models/token'
 
 class HTTP {
   /**
@@ -124,6 +124,6 @@ class HTTP {
   }
 }
 
-module.exports = {
-  HTTP,
+export {
+  HTTP
 }

@@ -1,4 +1,4 @@
-const { HTTP } = require('../utils/request')
+import { HTTP } from '../utils/request'
 
 class ClassicModel extends HTTP {
   getLatest() {
@@ -12,6 +12,6 @@ class ClassicModel extends HTTP {
   }
 }
 
-module.exports = {
+export {
   ClassicModel,
 }

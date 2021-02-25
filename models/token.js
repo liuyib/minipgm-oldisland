@@ -1,4 +1,4 @@
-const { HTTP } = require('../utils/request')
+import { HTTP } from '../utils/request'
 
 class TokenModel extends HTTP {
   /**
@@ -73,6 +73,6 @@ class TokenModel extends HTTP {
 
 }
 
-module.exports = {
+export {
   TokenModel,
 }
