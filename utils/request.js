@@ -99,12 +99,15 @@ class HTTP {
    */
   _refresh(...param) {
     const token = new TokenModel()
-
-    token.getFromServer(() => {
+    const requestAgain = () => {
       this._request({
         ...param,
         isRefreshToken: true,
       })
+    }
+
+    token.getFromServer({
+      success: requestAgain
     })
   }
 
