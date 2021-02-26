@@ -58,8 +58,8 @@ class HTTP {
       // HTTP Basic Auth 协议需要携带的请求头
       Authorization: this._encode(),
     }
-
-    wx.request({
+    const reqCache = getApp().globalData.reqCache
+    const reqTask = wx.request({
       url,
       method,
       data,
@@ -85,9 +85,20 @@ class HTTP {
         }
       },
       fail: (err) => {
-        reject(err)
+        // 请求被取消时，不返回错误信息
+        if (err && err.errMsg !== 'request:fail abort') {
+          reject(err)
+        }
       }
     })
+    const cacheKey = `url:${url},method:${method}`
+    const cacheVal = reqCache.get(cacheKey)
+
+    if (cacheVal) {
+      cacheVal.abort()
+    }
+
+    reqCache.set(cacheKey, reqTask)
   }
 
   /**
