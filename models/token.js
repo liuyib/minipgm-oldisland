@@ -45,8 +45,8 @@ class TokenModel extends HTTP {
             }
           }).catch((err) => {
             wx.showToast({
-              title: err,
-              icon: 'icon',
+              title: err.message || err.errMsg || 'token 获取失败',
+              icon: 'none',
             })
           })
         }

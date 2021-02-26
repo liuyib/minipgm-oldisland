@@ -4,5 +4,6 @@ App({
   onLaunch() {
     const tokenModel = new TokenModel()
     tokenModel.verify()
-  }
+  },
+
 });

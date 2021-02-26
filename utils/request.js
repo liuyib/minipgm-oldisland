@@ -48,21 +48,19 @@ class HTTP {
     resolve,
     reject,
   }) {
-    let url = ''
-
-    if (uri.startsWith('http')) {
-      url = uri
-    } else {
-      url = urlResolve(config.apiBaseUrl, uri)
+    if (typeof uri !== 'string') {
+      reject('uri 参数必须是字符串')
     }
 
+    const url = uri.startsWith('http') ? uri : urlResolve(config.apiBaseUrl, uri)
     const header = {
       'content-type': 'application/json',
+      // HTTP Basic Auth 协议需要携带的请求头
       Authorization: this._encode(),
     }
 
     wx.request({
-      url: url,
+      url,
       method,
       data,
       header,
@@ -97,8 +95,8 @@ class HTTP {
    * @api private
    * @returns
    */
-  _refresh(...param) {
-    const token = new TokenModel()
+  _refresh(param) {
+    const tokenModel = new TokenModel()
     const requestAgain = () => {
       this._request({
         ...param,
@@ -106,7 +104,7 @@ class HTTP {
       })
     }
 
-    token.getFromServer({
+    tokenModel.getFromServer({
       success: requestAgain
     })
   }
