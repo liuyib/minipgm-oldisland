@@ -8,5 +8,7 @@
 
   <v-movie class="classic-movie" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-movie>
 
-  <v-navication class="classic-navi" title="{{ classicData.title }}"></v-navication>
+  <v-navication class="classic-navi" title="{{ classicData.title }}" bind:myLeftClick="onLeftClick"
+    bind:myRightClick="onRightClick">
+  </v-navication>
 </view>

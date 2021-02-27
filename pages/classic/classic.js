@@ -89,6 +89,14 @@ Page({
           icon: 'none',
         })
       })
-  }
+  },
+
+  onLeftClick() {
+    console.log('left')
+  },
+
+  onRightClick() {
+    console.log('right')
+  },
 
 })

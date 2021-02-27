@@ -1,6 +1,6 @@
 <!--components/navication/index.wxml-->
 <view class="container">
-  <image class="icon" src="{{ isFirst ? leftDisableSrc : leftSrc }}"></image>
+  <image class="icon" src="{{ isFirst ? leftDisableSrc : leftSrc }}" bind:tap="onLeftClick"></image>
   <text class="title">{{ title }}</text>
-  <image class="icon" src="{{ isLast ? rightDisableSrc : rightSrc }}"></image>
+  <image class="icon" src="{{ isLast ? rightDisableSrc : rightSrc }}" bind:tap="onRightClick"></image>
 </view>

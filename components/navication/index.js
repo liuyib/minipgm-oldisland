@@ -31,6 +31,21 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    onLeftClick() {
+      const { isFirst } = this.data
+
+      if (isFirst) return;
+
+      this.triggerEvent('myLeftClick', {}, {})
+    },
+
+    onRightClick() {
+      const { isLast } = this.data
+
+      if (isLast) return;
+
+      this.triggerEvent('myRightClick', {}, {})
+    },
 
   }
 })
