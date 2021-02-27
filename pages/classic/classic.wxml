@@ -1,6 +1,10 @@
 <!--pages/classic/classic.wxml-->
 <view>
-  <v-order index="{{ classicData.index }}"></v-order>
-  <v-like isLike="{{ !!classicData.like_status }}" count="{{ classicData.fav_nums }}" bind:myLike="onLike" />
+  <view class="header">
+    <v-order class="header-order" index="{{ classicData.index }}"></v-order>
+    <v-like class="header-like" isLike="{{ !!classicData.like_status }}" count="{{ classicData.fav_nums }}"
+      bind:myLike="onLike" />
+  </view>
+
   <v-movie banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-movie>
 </view>
