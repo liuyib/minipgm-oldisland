@@ -96,30 +96,20 @@ Page({
   },
 
   onLeftClick() {
-    const { index } = this.data.currData
-    const { latestIndex } = this.data
-
-    classicModel
-      .getNext(index)
-      .then((res) => {
-        const newIndex = res.data.index
-
-        this.setData({
-          currData: res.data,
-          isFirst: classicModel.isFirst(newIndex, latestIndex),
-          isLast: classicModel.isLast(newIndex),
-        })
-      })
+    this._getClassic('getNext')
   },
 
   onRightClick() {
-    const { index } = this.data.currData
-    const { latestIndex } = this.data
+    this._getClassic('getPrev')
+  },
 
-    classicModel
-      .getPrev(index)
+  _getClassic(method) {
+    const { index } = this.data.currData
+
+    classicModel[method](index)
       .then((res) => {
         const newIndex = res.data.index
+        const { latestIndex } = this.data
 
         this.setData({
           currData: res.data,
@@ -127,6 +117,6 @@ Page({
           isLast: classicModel.isLast(newIndex),
         })
       })
-  },
+  }
 
 })

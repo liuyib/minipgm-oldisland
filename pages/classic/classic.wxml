@@ -6,9 +6,12 @@
       bind:myLike="onLike" />
   </view>
 
-  <!-- <v-movie class="classic-movie" banner="{{ currData.image }}" content="{{ currData.content }}"></v-movie> -->
-  <!-- <v-music class="classic-music" banner="{{ currData.image }}" content="{{ currData.content }}"></v-music> -->
-  <v-sentence class="classic-sentence" banner="{{ currData.image }}" content="{{ currData.content }}">
+  <v-movie wx:if="{{ currData.type == 100 }}" class="classic-movie" banner="{{ currData.image }}"
+    content="{{ currData.content }}"></v-movie>
+  <v-music wx:if="{{ currData.type == 200 }}" class="classic-music" banner="{{ currData.image }}"
+    content="{{ currData.content }}"></v-music>
+  <v-sentence wx:if="{{ currData.type == 300 }}" class="classic-sentence" banner="{{ currData.image }}"
+    content="{{ currData.content }}">
   </v-sentence>
 
   <v-navication class="classic-navi" title="{{ currData.title }}" isFirst="{{ isFirst }}" isLast="{{ isLast }}"
