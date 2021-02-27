@@ -7,6 +7,29 @@ class ClassicModel extends HTTP {
       method: 'GET',
     })
   }
+
+  getPrev(index) {
+    return this.request({
+      uri: `/classic/${index}/prev`,
+      method: 'GET'
+    })
+  }
+
+  getNext(index) {
+    return this.request({
+      uri: `/classic/${index}/next`,
+      method: 'GET'
+    })
+  }
+
+  isFirst(index, maxIndex) {
+    return index === maxIndex
+  }
+
+  isLast(index) {
+    return index === 1
+  }
+
 }
 
 export {

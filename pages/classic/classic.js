@@ -11,7 +11,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classicData: {},
+    currData: {},
+    latestIndex: 0,
+    isFirst: true,
+    isLast: false,
   },
 
   /**
@@ -22,7 +25,8 @@ Page({
       .getLatest()
       .then((res) => {
         this.setData({
-          classicData: res.data,
+          currData: res.data,
+          latestIndex: res.data.index,
         })
       })
   },
@@ -78,7 +82,7 @@ Page({
 
   onLike: function (event) {
     const { isLike } = event.detail
-    const { id, type } = this.data.classicData
+    const { id, type } = this.data.currData
     const url = `/favor${isLike ? '/cancel' : ''}`
 
     likeModel
@@ -92,11 +96,37 @@ Page({
   },
 
   onLeftClick() {
-    console.log('left')
+    const { index } = this.data.currData
+    const { latestIndex } = this.data
+
+    classicModel
+      .getNext(index)
+      .then((res) => {
+        const newIndex = res.data.index
+
+        this.setData({
+          currData: res.data,
+          isFirst: classicModel.isFirst(newIndex, latestIndex),
+          isLast: classicModel.isLast(newIndex),
+        })
+      })
   },
 
   onRightClick() {
-    console.log('right')
+    const { index } = this.data.currData
+    const { latestIndex } = this.data
+
+    classicModel
+      .getPrev(index)
+      .then((res) => {
+        const newIndex = res.data.index
+
+        this.setData({
+          currData: res.data,
+          isFirst: classicModel.isFirst(newIndex, latestIndex),
+          isLast: classicModel.isLast(newIndex),
+        })
+      })
   },
 
 })

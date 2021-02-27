@@ -1,17 +1,17 @@
 <!--pages/classic/classic.wxml-->
 <view class="classic-container">
   <view class="classic-header">
-    <v-order class="header-order" index="{{ classicData.index }}"></v-order>
-    <v-like class="header-like" isLike="{{ !!classicData.like_status }}" count="{{ classicData.fav_nums }}"
+    <v-order class="header-order" index="{{ currData.index }}"></v-order>
+    <v-like class="header-like" isLike="{{ !!currData.like_status }}" count="{{ currData.fav_nums }}"
       bind:myLike="onLike" />
   </view>
 
-  <!-- <v-movie class="classic-movie" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-movie> -->
-  <!-- <v-music class="classic-music" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-music> -->
-  <v-sentence class="classic-sentence" banner="{{ classicData.image }}" content="{{ classicData.content }}">
+  <!-- <v-movie class="classic-movie" banner="{{ currData.image }}" content="{{ currData.content }}"></v-movie> -->
+  <!-- <v-music class="classic-music" banner="{{ currData.image }}" content="{{ currData.content }}"></v-music> -->
+  <v-sentence class="classic-sentence" banner="{{ currData.image }}" content="{{ currData.content }}">
   </v-sentence>
 
-  <v-navication class="classic-navi" title="{{ classicData.title }}" bind:myLeftClick="onLeftClick"
-    bind:myRightClick="onRightClick">
+  <v-navication class="classic-navi" title="{{ currData.title }}" isFirst="{{ isFirst }}" isLast="{{ isLast }}"
+    bind:myLeftClick="onLeftClick" bind:myRightClick="onRightClick">
   </v-navication>
 </view>
