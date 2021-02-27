@@ -32,7 +32,7 @@ Component({
       }
 
       this.setData(newData)
-      this.triggerEvent('like', { isLike }, {})
+      this.triggerEvent('myLike', { isLike }, {})
     }
   }
 })
