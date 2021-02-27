@@ -10,7 +10,7 @@
   height: 500rpx;
 }
 
-.movie-imageTag {
+.movie-image_tag {
   position: relative;
   right: 310rpx;
   bottom: 58rpx;
