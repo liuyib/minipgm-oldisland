@@ -1,10 +1,12 @@
 <!--pages/classic/classic.wxml-->
-<view>
-  <view class="header">
+<view class="classic-container">
+  <view class="classic-header">
     <v-order class="header-order" index="{{ classicData.index }}"></v-order>
     <v-like class="header-like" isLike="{{ !!classicData.like_status }}" count="{{ classicData.fav_nums }}"
       bind:myLike="onLike" />
   </view>
 
-  <v-movie banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-movie>
+  <v-movie class="classic-movie" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-movie>
+
+  <v-navication class="classic-navi" title="{{ classicData.title }}"></v-navication>
 </view>

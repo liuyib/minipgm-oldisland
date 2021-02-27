@@ -1,8 +1,26 @@
 /* pages/classic/classic.wxss */
-.header {
+.classic-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.classic-header {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: calc(100% - 50rpx);
   padding: 0 25rpx;
+}
+
+.classic-movie {
+  display: block;
+  width: 100%;
+}
+
+.classic-navi {
+  display: block;
+  position: absolute;
+  bottom: 40rpx;
 }

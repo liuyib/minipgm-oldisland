@@ -1,0 +1,6 @@
+<!--components/navication/index.wxml-->
+<view class="container">
+  <image class="icon" src="{{ isFirst ? leftDisableSrc : leftSrc }}"></image>
+  <text class="title">{{ title }}</text>
+  <image class="icon" src="{{ isLast ? rightDisableSrc : rightSrc }}"></image>
+</view>

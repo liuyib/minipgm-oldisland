@@ -2,6 +2,7 @@
   "usingComponents": {
     "v-like": "/components/like/index",
     "v-order": "/components/classic/order/index",
-    "v-movie": "/components/classic/movie/index"
+    "v-movie": "/components/classic/movie/index",
+    "v-navication": "/components/navication/index"
   }
 }
