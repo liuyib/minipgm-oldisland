@@ -1,0 +1,30 @@
+/* components/classic/order/index.wxss */
+.order-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.order-sign_no {
+  margin: auto 0 10rpx 0;
+}
+
+.order-index {
+  font-size: 60rpx;
+  font-weight: 600;
+}
+
+.order-devider {
+  margin: 0 10rpx;
+  font-size: 55rpx;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  display: block;
+  font-size: 26rpx;
+  text-align-last: justify;
+}
