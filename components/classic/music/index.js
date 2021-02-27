@@ -1,15 +1,13 @@
 // components/classic/music/index.js
+import { classicBehavior } from '../classic-behavior'
+
 Component({
+  behaviors: [classicBehavior],
+
   /**
    * 组件的属性列表
    */
   properties: {
-    banner: {
-      type: String,
-    },
-    content: {
-      type: String,
-    },
   },
 
   /**

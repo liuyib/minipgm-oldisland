@@ -1,17 +1,13 @@
 // components/classic/movie/index.js
+import { classicBehavior } from '../classic-behavior'
+
 Component({
+  behaviors: [classicBehavior],
+
   /**
    * 组件的属性列表
    */
   properties: {
-    // 封面图片
-    banner: {
-      type: String,
-    },
-    // 内容
-    content: {
-      type: String,
-    },
   },
 
   /**
