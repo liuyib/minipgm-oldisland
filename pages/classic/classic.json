@@ -4,6 +4,7 @@
     "v-order": "/components/classic/order/index",
     "v-movie": "/components/classic/movie/index",
     "v-music": "/components/classic/music/index",
+    "v-sentence": "/components/classic/sentence/index",
     "v-navication": "/components/navication/index"
   }
 }

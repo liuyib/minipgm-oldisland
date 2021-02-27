@@ -7,7 +7,9 @@
   </view>
 
   <!-- <v-movie class="classic-movie" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-movie> -->
-  <v-music class="classic-music" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-music>
+  <!-- <v-music class="classic-music" banner="{{ classicData.image }}" content="{{ classicData.content }}"></v-music> -->
+  <v-sentence class="classic-sentence" banner="{{ classicData.image }}" content="{{ classicData.content }}">
+  </v-sentence>
 
   <v-navication class="classic-navi" title="{{ classicData.title }}" bind:myLeftClick="onLeftClick"
     bind:myRightClick="onRightClick">
