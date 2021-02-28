@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "globals": {
+    "wx": "readonly",
+    "App": "readonly",
+    "getApp": "readonly",
+    "Page": "readonly",
+    "Component": "readonly",
+    "Behavior": "readonly"
+  },
+  "extends": ["standard", "prettier"],
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {}
+}
