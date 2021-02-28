@@ -96,17 +96,23 @@ Page({
   },
 
   onLeftClick() {
-    this._getClassic('getNext')
+    this._getClassic(true)
   },
 
   onRightClick() {
-    this._getClassic('getPrev')
+    this._getClassic(false)
   },
 
-  _getClassic(method) {
+  /**
+   * 获取期刊（通过指定的 API 路径）
+   * @param {boolean} isGetNext - 是否获取下一期
+   * @returns
+   */
+  _getClassic(isGetNext) {
     const { index } = this.data.currData
 
-    classicModel[method](index)
+    classicModel
+      .getClassic(index, isGetNext)
       .then((res) => {
         const newIndex = res.data.index
         const { latestIndex } = this.data
@@ -116,6 +122,7 @@ Page({
           isFirst: classicModel.isFirst(newIndex, latestIndex),
           isLast: classicModel.isLast(newIndex),
         })
+        wx.setStorageSync(`/classic/${newIndex}`, res)
       })
   }
 
