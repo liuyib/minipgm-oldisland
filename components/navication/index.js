@@ -14,7 +14,7 @@ Component({
     isLast: {
       type: Boolean,
       value: false,
-    }
+    },
   },
 
   /**
@@ -34,7 +34,7 @@ Component({
     onLeftClick() {
       const { isFirst } = this.data
 
-      if (isFirst) return;
+      if (isFirst) return
 
       this.triggerEvent('myLeftClick', {}, {})
     },
@@ -42,10 +42,9 @@ Component({
     onRightClick() {
       const { isLast } = this.data
 
-      if (isLast) return;
+      if (isLast) return
 
       this.triggerEvent('myRightClick', {}, {})
     },
-
-  }
+  },
 })

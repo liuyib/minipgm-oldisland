@@ -6,9 +6,7 @@ const classicBehavior = Behavior({
     content: {
       type: String,
     },
-  }
+  },
 })
 
-export {
-  classicBehavior,
-}
+export { classicBehavior }

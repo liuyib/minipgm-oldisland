@@ -5,11 +5,11 @@ Component({
    */
   properties: {
     isLike: {
-      type: Boolean
+      type: Boolean,
     },
     count: {
-      type: Number
-    }
+      type: Number,
+    },
   },
 
   /**
@@ -17,7 +17,7 @@ Component({
    */
   data: {
     likeSrc: './assets/like.png',
-    dissSrc: './assets/like@diss.png'
+    dissSrc: './assets/like@diss.png',
   },
 
   /**
@@ -33,6 +33,6 @@ Component({
 
       this.setData(newData)
       this.triggerEvent('myLike', { isLike }, {})
-    }
-  }
+    },
+  },
 })

@@ -10,5 +10,4 @@ App({
     const tokenModel = new TokenModel()
     tokenModel.verify()
   },
-
-});
+})

@@ -21,7 +21,7 @@ class ClassicModel extends HTTP {
     if (!cache) {
       return this.request({
         uri: `/classic/${index}/${isGetNext ? 'next' : 'prev'}`,
-        method: 'GET'
+        method: 'GET',
       })
     } else {
       return new Promise((resolve) => resolve(cache))
@@ -35,9 +35,6 @@ class ClassicModel extends HTTP {
   isLast(index) {
     return index === 1
   }
-
 }
 
-export {
-  ClassicModel,
-}
+export { ClassicModel }

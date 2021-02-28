@@ -29,28 +29,31 @@ class TokenModel extends HTTP {
     wx.login({
       success(res) {
         if (res.code) {
-          _this.request({
-            uri: '/token',
-            method: 'POST',
-            data: {
-              account: res.code,
-              // type: 100 表示小程序端登录
-              type: 100
-            },
-          }).then((res) => {
-            wx.setStorageSync('token', res.data)
-
-            if (typeof success === 'function') {
-              success()
-            }
-          }).catch((err) => {
-            wx.showToast({
-              title: err.message || err.errMsg || 'token 获取失败',
-              icon: 'none',
+          _this
+            .request({
+              uri: '/token',
+              method: 'POST',
+              data: {
+                account: res.code,
+                // type: 100 表示小程序端登录
+                type: 100,
+              },
             })
-          })
+            .then((res) => {
+              wx.setStorageSync('token', res.data)
+
+              if (typeof success === 'function') {
+                success()
+              }
+            })
+            .catch((err) => {
+              wx.showToast({
+                title: err.message || err.errMsg || 'token 获取失败',
+                icon: 'none',
+              })
+            })
         }
-      }
+      },
     })
   }
 
@@ -70,9 +73,6 @@ class TokenModel extends HTTP {
       this.getFromServer()
     })
   }
-
 }
 
-export {
-  TokenModel,
-}
+export { TokenModel }

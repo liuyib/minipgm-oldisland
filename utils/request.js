@@ -10,12 +10,7 @@ class HTTP {
    * @param 见 this._request
    * @returns {Promise}
    */
-  request({
-    uri,
-    method = 'GET',
-    data = {},
-    isRefreshToken = true,
-  }) {
+  request({ uri, method = 'GET', data = {}, isRefreshToken = true }) {
     return new Promise((resolve, reject) => {
       this._request({
         uri,
@@ -52,7 +47,9 @@ class HTTP {
       reject('uri 参数必须是字符串')
     }
 
-    const url = uri.startsWith('http') ? uri : urlResolve(config.apiBaseUrl, uri)
+    const url = uri.startsWith('http')
+      ? uri
+      : urlResolve(config.apiBaseUrl, uri)
     const header = {
       'content-type': 'application/json',
       // HTTP Basic Auth 协议需要携带的请求头
@@ -89,7 +86,7 @@ class HTTP {
         if (err && err.errMsg !== 'request:fail abort') {
           reject(err)
         }
-      }
+      },
     })
     const cacheKey = `url:${url},method:${method}`
     const cacheVal = reqCache.get(cacheKey)
@@ -116,7 +113,7 @@ class HTTP {
     }
 
     tokenModel.getFromServer({
-      success: requestAgain
+      success: requestAgain,
     })
   }
 
@@ -133,6 +130,4 @@ class HTTP {
   }
 }
 
-export {
-  HTTP
-}
+export { HTTP }

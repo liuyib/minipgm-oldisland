@@ -1,9 +1,9 @@
-const formatNumber = n => {
+const formatNumber = (n) => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
 
-const formatTime = date => {
+const formatTime = (date) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -11,7 +11,13 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
+  return `${[year, month, day].map(formatNumber).join('/')} ${[
+    hour,
+    minute,
+    second,
+  ]
+    .map(formatNumber)
+    .join(':')}`
 }
 
 /**
@@ -28,11 +34,11 @@ const trimSlash = (str, option) => {
     left: (option && option.left) || true,
     right: (option && option.right) || true,
   }
-  const trimLeft = op.left ? '^[\\\/\\\\]+' : ''
-  const trimRight = op.right ? '[\\\/\\\\]+$' : ''
+  const trimLeft = op.left ? '^[\\/\\\\]+' : ''
+  const trimRight = op.right ? '[\\/\\\\]+$' : ''
   const reg = new RegExp(`${trimLeft}|${trimRight}`, 'g')
 
-  return str.replace(reg, '');
+  return str.replace(reg, '')
 }
 
 /**
@@ -52,7 +58,4 @@ const urlResolve = (base, ...paths) => {
   return result
 }
 
-export {
-  formatTime,
-  urlResolve,
-}
+export { formatTime, urlResolve }
