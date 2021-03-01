@@ -11,7 +11,7 @@ const classicBehavior = Behavior({
     // 小程序组件中的 hidden 属性，用于控制组件的显示或隐藏
     hidden: {
       type: Boolean,
-    }
+    },
   },
 })
 
