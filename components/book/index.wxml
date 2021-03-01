@@ -1,0 +1,13 @@
+<!--components/book/index.wxml-->
+<view class="book-container">
+  <image src="{{ book.image }}"></image>
+
+  <view class="book-desc">
+    <text class="book-title ellipsis">{{ book.title }}</text>
+    <text class="book-author ellipsis">{{ book.author }}</text>
+
+    <view class="book-footer" wx:if="{{ isShowLike }}">
+      <text class="book-like">{{ book.fav_nums }} 喜欢</text>
+    </view>
+  </view>
+</view>

@@ -1,14 +1,22 @@
+import { BookModel } from '../../models/book'
+
+const bookModel = new BookModel()
+
 // pages/book/book.js
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    books: [],
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    this._getHotList()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -44,4 +52,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
+
+  _getHotList() {
+    bookModel.getHotList().then((res) => {
+      this.setData({
+        books: res.data,
+      })
+    })
+  },
 })
