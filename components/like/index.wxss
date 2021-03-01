@@ -1,17 +1,17 @@
 /* components/like/index.wxss */
-.container {
+.like-container {
   width: auto;
   padding: 10rpx 0;
 }
 
-.container image {
+.like-image {
   display: inline-block;
   vertical-align: bottom;
   width: 32rpx;
   height: 28rpx;
 }
 
-.container text {
+.like-nums {
   display: inline-block;
   vertical-align: top;
   line-height: 24rpx;

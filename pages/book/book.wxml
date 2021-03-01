@@ -11,7 +11,7 @@
     <image class="books-hot" src="/assets/images/book/hot.png"></image>
 
     <view class="books-container">
-      <block wx:for="{{ books }}">
+      <block wx:for="{{ books }}" wx:key="{{ item.id }}">
         <v-book class="books-item" book="{{ item }}"></v-book>
       </block>
     </view>
