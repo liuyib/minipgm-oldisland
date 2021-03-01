@@ -1,5 +1,5 @@
 <!--components/classic/sentence/index.wxml-->
-<view class="sentence-container">
+<view class="sentence-container" hidden="{{ hidden }}">
   <image class="sentence-banner" src="{{ banner }}"></image>
   <image class="sentence-tag" src="./assets/sentence@tag.png"></image>
   <text class="sentence-content">{{ content }}</text>

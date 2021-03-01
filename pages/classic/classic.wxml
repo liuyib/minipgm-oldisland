@@ -6,11 +6,11 @@
       bind:myLike="onLike" />
   </view>
 
-  <v-movie wx:if="{{ currData.type == 100 }}" class="classic-movie" banner="{{ currData.image }}"
+  <v-movie hidden="{{ currData.type != 100 }}" class="classic-movie" banner="{{ currData.image }}"
     content="{{ currData.content }}"></v-movie>
-  <v-music wx:if="{{ currData.type == 200 }}" class="classic-music" banner="{{ currData.image }}"
+  <v-music hidden="{{ currData.type != 200 }}" class="classic-music" banner="{{ currData.image }}"
     content="{{ currData.content }}"></v-music>
-  <v-sentence wx:if="{{ currData.type == 300 }}" class="classic-sentence" banner="{{ currData.image }}"
+  <v-sentence hidden="{{ currData.type != 300 }}" class="classic-sentence" banner="{{ currData.image }}"
     content="{{ currData.content }}">
   </v-sentence>
 
