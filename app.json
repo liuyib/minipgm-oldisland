@@ -12,6 +12,9 @@
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
+    "selectedColor": "#000000",
+    "backgroundColor": "#ffffff",
+    "color": "#c7c7c7",
     "list": [
       {
         "text": "流行",
