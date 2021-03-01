@@ -1,7 +1,7 @@
 <!--components/classic/music/index.wxml-->
-<view class="base-container" hidden="{{ hidden }}">
+<view class="base-container">
   <image class="music-banner" src="{{ banner }}"></image>
-  <image class="music-player" src="{{ isPlaying ? playSrc : pauseSrc }}"></image>
+  <image class="music-player" src="{{ isPlaying ? playSrc : pauseSrc }}" bind:tap="onPlay"></image>
   <image class="music-tag" src="./assets/music@tag.png"></image>
   <text class="music-content">{{ content }}</text>
 </view>
