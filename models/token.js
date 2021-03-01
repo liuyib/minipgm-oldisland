@@ -40,7 +40,7 @@ class TokenModel extends HTTP {
               },
             })
             .then((res) => {
-              wx.setStorageSync('token', res.data)
+              wx.setStorage({ key: 'token', data: res.data })
 
               if (typeof success === 'function') {
                 success()

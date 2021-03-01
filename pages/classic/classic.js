@@ -101,7 +101,7 @@ Page({
         isFirst: classicModel.isFirst(newIndex, latestIndex),
         isLast: classicModel.isLast(newIndex),
       })
-      wx.setStorageSync(`/classic/${newIndex}`, res)
+      wx.setStorage({ key: `/classic/${newIndex}`, data: res })
     })
   },
 })
