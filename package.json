@@ -4,14 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "prepare": "husky install",
     "lint": "eslint **/**/*.js",
     "lint:fix": "eslint --fix **/**/*.js",
     "style": "prettier --write **/**/*.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run style && npm run lint:fix"
-    }
   },
   "repository": {
     "type": "git",
