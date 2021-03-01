@@ -1,4 +1,7 @@
 import { HTTP } from '../utils/request'
+import { LikeModel } from './like'
+
+const likeModel = new LikeModel()
 
 class ClassicModel extends HTTP {
   getLatest() {
@@ -14,17 +17,22 @@ class ClassicModel extends HTTP {
    * @param {boolean} isGetNext     - 是否获取下一期（true：获取下一期，false：获取上一期）
    * @returns {Promise}
    */
-  getClassic(index, isGetNext) {
+  async getClassic(index, isGetNext) {
     const key = `/classic/${isGetNext ? index + 1 : index - 1}`
     const cache = wx.getStorageSync(key)
 
-    if (!cache) {
+    if (cache) {
+      const { type, id } = cache.data
+      const like = await likeModel.getLike(`/classic/favor/${type}/${id}`)
+
+      Object.assign(cache.data, like.data)
+
+      return cache
+    } else {
       return this.request({
         uri: `/classic/${index}/${isGetNext ? 'next' : 'prev'}`,
         method: 'GET',
       })
-    } else {
-      return new Promise((resolve) => resolve(cache))
     }
   }
 

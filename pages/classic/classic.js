@@ -66,9 +66,9 @@ Page({
   onLike: function (event) {
     const { isLike } = event.detail
     const { id, type } = this.data.currData
-    const url = `/favor${isLike ? '/cancel' : ''}`
+    const uri = `/favor${isLike ? '/cancel' : ''}`
 
-    likeModel.setLike({ url, id, type }).then((res) => {
+    likeModel.setLike({ uri, id, type }).then((res) => {
       wx.showToast({
         title: res.msg,
         icon: 'none',
@@ -90,11 +90,11 @@ Page({
    * @returns
    */
   _getClassic(isGetNext) {
-    const { index } = this.data.currData
+    const latestIndex = this.data.latestIndex
+    const oldIndex = this.data.currData.index
 
-    classicModel.getClassic(index, isGetNext).then((res) => {
+    classicModel.getClassic(oldIndex, isGetNext).then((res) => {
       const newIndex = res.data.index
-      const { latestIndex } = this.data
 
       this.setData({
         currData: res.data,
