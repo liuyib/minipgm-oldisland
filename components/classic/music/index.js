@@ -64,10 +64,19 @@ Component({
 
     _listenBGM() {
       bgm.onPlay(() => {
-        this.setData({ isPlaying: true })
+        this._resetPlay()
       })
       bgm.onPause(() => {
-        this.setData({ isPlaying: false })
+        this._resetPlay()
+      })
+      bgm.onStop(() => {
+        this._resetPlay()
+      })
+      bgm.onEnded(() => {
+        this._resetPlay()
+      })
+      bgm.onError(() => {
+        this._resetPlay()
       })
     },
 
