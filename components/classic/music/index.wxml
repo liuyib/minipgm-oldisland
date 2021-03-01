@@ -1,5 +1,5 @@
 <!--components/classic/music/index.wxml-->
-<view class="music-container" hidden="{{ hidden }}">
+<view class="base-container" hidden="{{ hidden }}">
   <image class="music-banner" src="{{ banner }}"></image>
   <image class="music-player" src="{{ isPlaying ? playSrc : pauseSrc }}"></image>
   <image class="music-tag" src="./assets/music@tag.png"></image>

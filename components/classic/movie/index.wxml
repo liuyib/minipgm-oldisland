@@ -1,6 +1,6 @@
 <!--components/classic/movie/index.wxml-->
-<view class="movie-container" hidden="{{ hidden }}">
-  <image class="movie-banner" src="{{ banner }}"></image>
-  <image class="movie-tag" src="./assets/movie@tag.png"></image>
-  <text class="movie-content">{{ content }}</text>
+<view class="base-container" hidden="{{ hidden }}">
+  <image class="base-banner" src="{{ banner }}"></image>
+  <image class="base-tag" src="./assets/movie@tag.png"></image>
+  <text class="base-content">{{ content }}</text>
 </view>
