@@ -1,6 +1,6 @@
 <!--components/book/index.wxml-->
 <view class="book-container">
-  <image src="{{ book.image }}"></image>
+  <image class="book-cover" src="{{ book.image }}"></image>
 
   <view class="book-desc">
     <text class="book-title ellipsis">{{ book.title }}</text>
