@@ -132,6 +132,7 @@ Page({
         comment.then((res) => {
           const { comment } = res.data
 
+          comment.sort((a, b) => b.nums - a.nums)
           this.setData({
             comments: comment,
             isNoComment: comment && !comment.length,
