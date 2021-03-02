@@ -70,7 +70,7 @@
   </view>
 
   <view class="comment-container">
-    <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="content">
+    <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="{{ item.content + item.nums }}">
       <v-tag class="tag" text="{{ item.content }}" bind:myTap="onSubmitComment">
         <text class="num" slot="after">+{{ item.nums }}</text>
       </v-tag>

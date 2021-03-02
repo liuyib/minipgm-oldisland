@@ -84,17 +84,31 @@ Page({
   onSubmitComment(event) {
     const { id } = this.data
     const { value } = event.detail
-    const comment = bookModel.setShortComment({
-      artId: id,
-      content: value,
-    })
 
-    comment.then((res) => {
-      wx.showToast({
-        title: res.msg,
-        icon: 'none',
+    bookModel
+      .setShortComment({
+        artId: id,
+        content: value,
       })
-    })
+      .then((res) => {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        })
+
+        const { comments } = this.data
+
+        for (const comment of comments) {
+          if (comment.content === value) {
+            comment.nums++
+          }
+        }
+
+        this.setData({
+          comments,
+          isCommenting: false,
+        })
+      })
   },
 
   onLike() {
