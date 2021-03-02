@@ -28,7 +28,7 @@ var formatLF = function (text) {
   if (!text) return
 
   var reg = getRegExp('\\\\n', 'g')
-  var text = text.replace(reg, '\n')
+  var text = text.replace(reg, '\n&emsp;&emsp;')
 
   return text
 }
