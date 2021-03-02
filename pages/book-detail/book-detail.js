@@ -100,28 +100,30 @@ Page({
   onLike() {
     const { id, likeStatus } = this.data
     const uri = `/favor${likeStatus ? '/cancel' : ''}`
-    const like = bookModel.setLike({ uri, id, type: 400 })
 
-    like.then((res) => {
-      wx.showToast({
-        title: res.msg,
-        icon: 'none',
+    bookModel
+      .setLike({
+        uri,
+        id,
+        type: 400,
       })
-    })
+      .then((res) => {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        })
+      })
   },
 
   _getDetail(id) {
-    const detail = bookModel.getDetail(id)
-    const like = bookModel.getLike(id)
-    const comment = bookModel.getShortComment(id)
-
-    detail
+    bookModel
+      .getDetail(id)
       .then((res) => {
         this.setData({
           detail: res.data,
         })
 
-        like.then((res) => {
+        bookModel.getLike(id).then((res) => {
           const { data } = res
 
           this.setData({
@@ -129,7 +131,7 @@ Page({
             likeNums: data.fav_nums,
           })
         })
-        comment.then((res) => {
+        bookModel.getShortComment(id).then((res) => {
           const { comment } = res.data
 
           comment.sort((a, b) => b.nums - a.nums)
