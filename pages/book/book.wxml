@@ -12,7 +12,7 @@
 
     <view class="books-container">
       <block wx:for="{{ books }}" wx:key="id">
-        <v-book class="books-item" book="{{ item }}"></v-book>
+        <v-book class="books-item" book="{{ item }}" bind:myDetail="onDetail"></v-book>
       </block>
     </view>
   </view>

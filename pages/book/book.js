@@ -60,4 +60,12 @@ Page({
       })
     })
   },
+
+  onDetail(event) {
+    const { id } = event.detail
+
+    wx.navigateTo({
+      url: `/pages/book-detail/book-detail?id=${id}`,
+    })
+  },
 })

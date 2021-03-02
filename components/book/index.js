@@ -21,5 +21,10 @@ Component({
   /**
    * 组件的方法列表
    */
-  methods: {},
+  methods: {
+    onClick() {
+      const { id } = this.data.book
+      this.triggerEvent('myDetail', { id }, {})
+    },
+  },
 })
