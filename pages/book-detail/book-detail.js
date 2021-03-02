@@ -69,6 +69,40 @@ Page({
    */
   onShareAppMessage: function () {},
 
+  _getDetail(id) {
+    bookModel
+      .getDetail(id)
+      .then((res) => {
+        this.setData({
+          detail: res.data,
+        })
+
+        bookModel.getLike(id).then((res) => {
+          const { data } = res
+
+          this.setData({
+            likeStatus: !!data.like_status,
+            likeNums: data.fav_nums,
+          })
+        })
+        bookModel.getShortComment(id).then((res) => {
+          const { comment } = res.data
+
+          comment.sort((a, b) => b.nums - a.nums)
+          this.setData({
+            comments: comment,
+            isNoComment: comment && !comment.length,
+          })
+        })
+      })
+      .catch((err) => {
+        wx.showToast({
+          title: err,
+          icon: 'none',
+        })
+      })
+  },
+
   onComment() {
     this.setData({
       isCommenting: true,
@@ -138,40 +172,6 @@ Page({
       .then((res) => {
         wx.showToast({
           title: res.msg,
-          icon: 'none',
-        })
-      })
-  },
-
-  _getDetail(id) {
-    bookModel
-      .getDetail(id)
-      .then((res) => {
-        this.setData({
-          detail: res.data,
-        })
-
-        bookModel.getLike(id).then((res) => {
-          const { data } = res
-
-          this.setData({
-            likeStatus: !!data.like_status,
-            likeNums: data.fav_nums,
-          })
-        })
-        bookModel.getShortComment(id).then((res) => {
-          const { comment } = res.data
-
-          comment.sort((a, b) => b.nums - a.nums)
-          this.setData({
-            comments: comment,
-            isNoComment: comment && !comment.length,
-          })
-        })
-      })
-      .catch((err) => {
-        wx.showToast({
-          title: err,
           icon: 'none',
         })
       })
