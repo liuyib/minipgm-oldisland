@@ -1,0 +1,37 @@
+var padZero = function (index) {
+  return ('00' + index).slice(-2)
+}
+
+var limitArray = function (array, length) {
+  return array.slice(0, length)
+}
+
+var formatMonth = function (month) {
+  var months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+  return months[month]
+}
+
+var formatLF = function (text) {
+  if (!text) return
+
+  var reg = getRegExp('\\\\n', 'g')
+  var text = text.replace(reg, '\n')
+
+  return text
+}
+
+var formatDate = function (date) {
+  if (!date) return
+
+  var date = getDate(date).toLocaleDateString()
+
+  return date
+}
+
+module.exports = {
+  padZero: padZero,
+  limitArray: limitArray,
+  formatMonth: formatMonth,
+  formatLF: formatLF,
+  formatDate: formatDate,
+}

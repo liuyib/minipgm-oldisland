@@ -1,4 +1,6 @@
 <!--pages/book-detail/book-detail.wxml-->
+<wxs src="../../utils/util.wxs" module="util"></wxs>
+
 <view class="container">
   <view class="head">
     <image src="{{ detail.image }}"></image>
@@ -11,7 +13,7 @@
     <text class="shadow" wx:if="{{ isNoComment }}">还没有短评</text>
 
     <view class="comment-container">
-      <block wx:for="{{ util.limit(comments, 15) }}" wx:key="content">
+      <block wx:for="{{ util.limitArray(comments, 15) }}" wx:key="content">
         <v-tag class="tag" text="{{ item.content }}">
           <text class="num" slot="after">+{{ item.nums }}</text>
         </v-tag>
@@ -21,7 +23,7 @@
 
   <view class="sub-container">
     <text class="headline">内容简介</text>
-    <text class="content" decode="{{ true }}" user-select="{{ true }}">{{ util.format(detail.summary) }}</text>
+    <text class="content" decode="{{ true }}" user-select="{{ true }}">{{ util.formatLF(detail.summary) }}</text>
   </view>
 
   <view class="sub-container">
@@ -36,7 +38,7 @@
       </view>
       <view class="vertical">
         <text class="desc-val">{{ detail.publisher }}</text>
-        <text class="desc-val">{{ detail.pubdate }}</text>
+        <text class="desc-val">{{ util.formatDate(detail.pubdate) }}</text>
         <text class="desc-val">{{ detail.pages }}</text>
         <text class="desc-val">{{ detail.price }}</text>
         <text class="desc-val">{{ detail.binding }}</text>
@@ -67,7 +69,7 @@
   </view>
 
   <view class="comment-container">
-    <block wx:for="{{ util.limit(comments, 3) }}" wx:key="">
+    <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="">
       <v-tag v-class="tag" text="{{ item.content }}" bind:tapping="onPost">
         <text class="num" slot="after">+{{ item.nums }}</text>
       </v-tag>
@@ -76,23 +78,3 @@
 
   <input focus="{{ posting }}" confirm-type="发送" class="post" placeholder="短评最多 12 个字" bindconfirm="onPost"></input>
 </view>
-
-<wxs module="util">
-  var limit = function (array, length) {
-    return array.slice(0, length)
-  }
-
-  var format = function (text) {
-    if (!text) {
-      return
-    }
-    var reg = getRegExp('\\\\n', 'g')
-    var text = text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
-    return text
-  }
-
-  module.exports = {
-    limit: limit,
-    format: format,
-  }
-</wxs>

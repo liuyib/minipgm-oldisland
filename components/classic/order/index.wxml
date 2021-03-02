@@ -1,26 +1,13 @@
 <!--components/classic/order/index.wxml-->
-<wxs module="m1">
-  // 个位数字补零
-  var getIndex = function (index) {
-    return ('00' + index).slice(-2)
-  }
-
-  var getMonth = function (month) {
-    var months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-    return months[month]
-  }
-
-  module.exports.getIndex = getIndex
-  module.exports.getMonth = getMonth
-</wxs>
+<wxs src="../../../utils/util.wxs" module="util"></wxs>
 
 <view class="order-container">
   <text class="order-sign_no">No.</text>
-  <text class="order-index">{{ m1.getIndex(index) }}</text>
+  <text class="order-index">{{ util.padZero(index) }}</text>
   <text class="order-devider">|</text>
 
   <text class="date-container">
-    <text class="date">{{ m1.getMonth(month) }}</text>
+    <text class="date">{{ util.formatMonth(month) }}</text>
     <text class="date">{{ year }}</text>
   </text>
 </view>
