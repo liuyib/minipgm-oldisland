@@ -1,4 +1,7 @@
 import { HTTP } from '../utils/request'
+import { LikeModel } from './like'
+
+const likeModel = new LikeModel()
 
 class BookModel extends HTTP {
   getHotList() {
@@ -26,6 +29,14 @@ class BookModel extends HTTP {
     return this.request({
       uri: `/book/short_comment/${id}`,
       method: 'GET',
+    })
+  }
+
+  setLike({ uri, id, type }) {
+    return likeModel.setLike({
+      uri,
+      id,
+      type,
     })
   }
 }

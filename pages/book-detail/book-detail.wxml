@@ -47,21 +47,23 @@
   </view>
 </view>
 
-<view class="post-container" wx:if="{{ !posting }}">
+<view class="post-container" wx:if="{{ !isPosting }}">
   <view class="post-fake" bind:tap="onFakePost">
     <text>输入短评</text>
   </view>
+
   <view class="like-container">
-    <like-cmp bind:like="onLike" class="like" like="{{ like }}" count="{{ count }}" />
-    <img-btn-cmp class="share-btn" open-type="share">
+    <v-like class="like" isLike="{{ likeStatus }}" count="{{ likeNums }}" bind:myLike="onLike" />
+
+    <!-- <img-btn-cmp class="share-btn" open-type="share">
       <image class="share" slot="img" src="/assets/images/icon/share.png" />
-    </img-btn-cmp>
+    </img-btn-cmp> -->
   </view>
 </view>
 
-<mask-cmp wx:if="{{ posting }}" />
+<mask-cmp wx:if="{{ isPosting }}" />
 
-<view wx:if="{{ posting }}" class="posting-container">
+<view wx:if="{{ isPosting }}" class="posting-container">
   <view class="post-header">
     <text wx:if="{{ !(comments==false) }}">仅可点击标签+1</text>
     <text wx:else>暂无短评</text>
@@ -76,5 +78,5 @@
     </block>
   </view>
 
-  <input focus="{{ posting }}" confirm-type="发送" class="post" placeholder="短评最多 12 个字" bindconfirm="onPost"></input>
+  <input focus="{{ isPosting }}" confirm-type="发送" class="post" placeholder="短评最多 12 个字" bindconfirm="onPost"></input>
 </view>

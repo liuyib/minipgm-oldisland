@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: 0,
     // 数据详情数据
     detail: null,
     // 是否点赞
@@ -25,6 +26,7 @@ Page({
   onLoad: function (options) {
     const { id } = options
 
+    this.setData({ id })
     this._getDetail(id)
   },
 
@@ -62,6 +64,19 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
+
+  onLike() {
+    const { id, likeStatus } = this.data
+    const uri = `/favor${likeStatus ? '/cancel' : ''}`
+    const like = bookModel.setLike({ uri, id, type: 400 })
+
+    like.then((res) => {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none',
+      })
+    })
+  },
 
   _getDetail(id) {
     const detail = bookModel.getDetail(id)
