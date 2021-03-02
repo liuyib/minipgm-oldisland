@@ -6,14 +6,16 @@
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "lint-staged",
-    "lint": "eslint **/**/*.js",
-    "lint:fix": "eslint --fix **/**/*.js",
-    "style": "prettier --write **/**/*.js"
+    "lint": "eslint **/**/*.{js,wxs}",
+    "lint:fix": "eslint --fix **/**/*.{js,wxs}",
+    "style": "prettier --write **/**/*.{js,wxs}"
   },
   "lint-staged": {
-    "*.{js,wxs}": [
-      "prettier --write",
+    "*.js": [
       "eslint --fix"
+    ],
+    "*.{js,wxs}": [
+      "prettier --write"
     ]
   },
   "repository": {
