@@ -1,5 +1,5 @@
 <!--components/classic/order/index.wxml-->
-<wxs src="../../../utils/util.wxs" module="util"></wxs>
+<wxs src="../../../utils/filter.wxs" module="util"></wxs>
 
 <view class="order-container">
   <text class="order-sign_no">No.</text>

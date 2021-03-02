@@ -1,5 +1,5 @@
 <!--pages/book-detail/book-detail.wxml-->
-<wxs src="../../utils/util.wxs" module="util"></wxs>
+<wxs src="../../utils/filter.wxs" module="util"></wxs>
 
 <view class="container">
   <view class="head">

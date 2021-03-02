@@ -85,7 +85,6 @@ Page({
         comment.then((res) => {
           const { comment } = res.data
 
-          console.log(comment)
           this.setData({
             comments: comment,
             isNoComment: comment && !comment.length,
