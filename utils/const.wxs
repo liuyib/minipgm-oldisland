@@ -1,0 +1,26 @@
+// 抽象类 ART 中的实体类型
+var ART_TYPE = {
+  // 电影类型的期刊
+  MOVIE: 100,
+  // 音乐类型的期刊
+  MUSIC: 200,
+  // 句子类型的期刊
+  SENTENCE: 300,
+  // 书籍
+  BOOK: 400,
+}
+
+// 数据页面短评相关的常量
+var SHORT_COMMENT = {
+  // 短评的显示数量
+  SHOW_NUMS: 15,
+  // 一个短评的最大字数
+  MAX_LENGTH: 12,
+  // 添加短评的弹框中，显示的用于 +1 的短评数量
+  PLUS_ONE_NUMS: 3,
+}
+
+module.exports = {
+  ART_TYPE: ART_TYPE,
+  SHORT_COMMENT: SHORT_COMMENT,
+}

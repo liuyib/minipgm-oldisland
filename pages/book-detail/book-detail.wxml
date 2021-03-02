@@ -1,5 +1,6 @@
 <!--pages/book-detail/book-detail.wxml-->
 <wxs src="../../utils/filter.wxs" module="util"></wxs>
+<wxs src="../../utils/const.wxs" module="const"></wxs>
 
 <view class="container">
   <view class="head">
@@ -13,7 +14,7 @@
     <text class="shadow" wx:if="{{ isNoComment }}">还没有短评</text>
 
     <view class="comment-container">
-      <block wx:for="{{ util.limitArray(comments, 15) }}" wx:key="content">
+      <block wx:for="{{ util.limitArray(comments, const.SHORT_COMMENT.SHOW_NUMS) }}" wx:key="content">
         <v-tag class="tag" text="{{ item.content }}">
           <text class="num" slot="after">+{{ item.nums }}</text>
         </v-tag>
@@ -70,13 +71,13 @@
   </view>
 
   <view class="comment-container">
-    <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="{{ item.content + item.nums }}">
+    <block wx:for="{{ util.limitArray(comments, const.SHORT_COMMENT.PLUS_ONE_NUMS) }}" wx:key="content">
       <v-tag class="tag" text="{{ item.content }}" bind:myTap="onSubmitComment">
         <text class="num" slot="after">+{{ item.nums }}</text>
       </v-tag>
     </block>
   </view>
 
-  <input class="post" focus="{{ isCommenting }}" confirm-type="send" maxlength="{{ 12 }}" placeholder="短评最多 12 个字"
-    bind:confirm="onSubmitComment"></input>
+  <input class="post" focus="{{ isCommenting }}" confirm-type="send" maxlength="{{ const.SHORT_COMMENT.MAX_LENGTH }}"
+    placeholder="短评最多 {{ const.SHORT_COMMENT.MAX_LENGTH }} 个字" bind:confirm="onSubmitComment"></input>
 </view>

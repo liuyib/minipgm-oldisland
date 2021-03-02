@@ -1,4 +1,6 @@
 <!--pages/classic/classic.wxml-->
+<wxs src="../../utils/const.wxs" module="const"></wxs>
+
 <view class="classic-container">
   <view class="classic-header">
     <v-order class="header-order" index="{{ currData.index }}"></v-order>
@@ -6,12 +8,12 @@
       bind:myLike="onLike" />
   </view>
 
-  <v-movie hidden="{{ currData.type != 100 }}" class="classic-movie" banner="{{ currData.image }}"
+  <v-movie hidden="{{ currData.type != const.ART_TYPE.MOVIE }}" class="classic-movie" banner="{{ currData.image }}"
     content="{{ currData.content }}"></v-movie>
-  <v-music wx:if="{{ currData.type == 200 }}" class="classic-music" banner="{{ currData.image }}"
+  <v-music wx:if="{{ currData.type == const.ART_TYPE.MUSIC }}" class="classic-music" banner="{{ currData.image }}"
     content="{{ currData.content }}" data="{{ currData }}"></v-music>
-  <v-sentence hidden="{{ currData.type != 300 }}" class="classic-sentence" banner="{{ currData.image }}"
-    content="{{ currData.content }}">
+  <v-sentence hidden="{{ currData.type != const.ART_TYPE.SENTENCE }}" class="classic-sentence"
+    banner="{{ currData.image }}" content="{{ currData.content }}">
   </v-sentence>
 
   <v-navication class="classic-navi" title="{{ currData.title }}" isFirst="{{ isFirst }}" isLast="{{ isLast }}"
