@@ -25,7 +25,7 @@ Component({
   methods: {
     onClick: function () {
       const { text } = this.data
-      this.triggerEvent('myTap', text)
+      this.triggerEvent('myTap', { value: text }, {})
     },
   },
 })

@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 该书籍的 ID
     id: 0,
     // 数据详情数据
     detail: null,
@@ -17,7 +18,10 @@ Page({
     likeNums: 0,
     // 书籍短评
     comments: [],
+    // 是否没有短评
     isNoComment: true,
+    // 是否正在评论
+    isCommenting: false,
   },
 
   /**
@@ -64,6 +68,34 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
+
+  onComment() {
+    this.setData({
+      isCommenting: true,
+    })
+  },
+
+  onCancel() {
+    this.setData({
+      isCommenting: false,
+    })
+  },
+
+  onSubmitComment(event) {
+    const { id } = this.data
+    const { value } = event.detail
+    const comment = bookModel.setShortComment({
+      artId: id,
+      content: value,
+    })
+
+    comment.then((res) => {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none',
+      })
+    })
+  },
 
   onLike() {
     const { id, likeStatus } = this.data

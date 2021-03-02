@@ -32,6 +32,17 @@ class BookModel extends HTTP {
     })
   }
 
+  setShortComment({ artId, content }) {
+    return this.request({
+      uri: `/book/short_comment/add`,
+      method: 'POST',
+      data: {
+        artId,
+        content,
+      },
+    })
+  }
+
   setLike({ uri, id, type }) {
     return likeModel.setLike({
       uri,

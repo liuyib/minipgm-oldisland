@@ -47,8 +47,8 @@
   </view>
 </view>
 
-<view class="post-container" wx:if="{{ !isPosting }}">
-  <view class="post-fake" bind:tap="onFakePost">
+<view class="post-container" wx:if="{{ !isCommenting }}">
+  <view class="post-fake" bind:tap="onComment">
     <text>输入短评</text>
   </view>
 
@@ -61,22 +61,22 @@
   </view>
 </view>
 
-<mask-cmp wx:if="{{ isPosting }}" />
+<!-- <mask-cmp wx:if="{{ isCommenting }}" /> -->
 
-<view wx:if="{{ isPosting }}" class="posting-container">
+<view wx:if="{{ isCommenting }}" class="posting-container">
   <view class="post-header">
-    <text wx:if="{{ !(comments==false) }}">仅可点击标签+1</text>
-    <text wx:else>暂无短评</text>
+    <text>{{ isNoComment ? "暂无短评" : "点击标签即可 +1" }}</text>
     <text class="cancel" bind:tap="onCancel">取消</text>
   </view>
 
   <view class="comment-container">
-    <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="">
-      <v-tag v-class="tag" text="{{ item.content }}" bind:tapping="onPost">
+    <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="content">
+      <v-tag text="{{ item.content }}" bind:myTap="onSubmitComment">
         <text class="num" slot="after">+{{ item.nums }}</text>
       </v-tag>
     </block>
   </view>
 
-  <input focus="{{ isPosting }}" confirm-type="发送" class="post" placeholder="短评最多 12 个字" bindconfirm="onPost"></input>
+  <input class="post" focus="{{ isCommenting }}" confirm-type="send" placeholder="短评最多 12 个字"
+    bind:confirm="onSubmitComment"></input>
 </view>
