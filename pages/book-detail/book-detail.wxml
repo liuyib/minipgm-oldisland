@@ -77,6 +77,6 @@
     </block>
   </view>
 
-  <input class="post" focus="{{ isCommenting }}" confirm-type="send" placeholder="短评最多 12 个字"
+  <input class="post" focus="{{ isCommenting }}" confirm-type="send" maxlength="{{ 12 }}" placeholder="短评最多 12 个字"
     bind:confirm="onSubmitComment"></input>
 </view>
