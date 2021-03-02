@@ -91,24 +91,38 @@ Page({
         content: value,
       })
       .then((res) => {
+        this._updateComments(value)
         wx.showToast({
           title: res.msg,
           icon: 'none',
         })
-
-        const { comments } = this.data
-
-        for (const comment of comments) {
-          if (comment.content === value) {
-            comment.nums++
-          }
-        }
-
-        this.setData({
-          comments,
-          isCommenting: false,
-        })
       })
+  },
+
+  /**
+   * 同步短评数据到页面上
+   * @param {string} added 新添加的短评
+   * @returns
+   */
+  _updateComments(added) {
+    const { comments } = this.data
+    let isNewComment = true
+
+    for (const comment of comments) {
+      if (comment.content === added) {
+        comment.nums++
+        isNewComment = false
+      }
+    }
+
+    if (isNewComment) {
+      comments.push({ content: added, nums: 1 })
+    }
+
+    this.setData({
+      comments,
+      isCommenting: false,
+    })
   },
 
   onLike() {
