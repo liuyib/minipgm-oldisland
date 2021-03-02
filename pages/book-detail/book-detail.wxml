@@ -61,7 +61,7 @@
   </view>
 </view>
 
-<!-- <mask-cmp wx:if="{{ isCommenting }}" /> -->
+<v-mask wx:if="{{ isCommenting }}" bind:tap="onCancel" />
 
 <view wx:if="{{ isCommenting }}" class="posting-container">
   <view class="post-header">
@@ -71,7 +71,7 @@
 
   <view class="comment-container">
     <block wx:for="{{ util.limitArray(comments, 3) }}" wx:key="content">
-      <v-tag text="{{ item.content }}" bind:myTap="onSubmitComment">
+      <v-tag class="tag" text="{{ item.content }}" bind:myTap="onSubmitComment">
         <text class="num" slot="after">+{{ item.nums }}</text>
       </v-tag>
     </block>
