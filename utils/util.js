@@ -58,4 +58,30 @@ const urlResolve = (base, ...paths) => {
   return result
 }
 
-export { formatTime, urlResolve }
+/**
+ * 获取 WXML 节点相关信息
+ * 见：https://developers.weixin.qq.com/miniprogram/dev/api/wxml/NodesRef.fields.html
+ * @param {Object} option
+ * @param {Object} option.ctx      - 上下文
+ * @param {string} option.selector - 选择器
+ * @param {Object} option.fields   - 指定获取的属性
+ * @param {Object} option.ctx      - 返回值
+ * @returns
+ */
+const getDomInfo = ({ ctx, selector, fields = {}, ret }) => {
+  ctx
+    .createSelectorQuery()
+    .select(selector)
+    .fields(
+      {
+        dataset: true,
+        ...fields,
+      },
+      function (res) {
+        Object.assign(ret, res)
+      },
+    )
+    .exec()
+}
+
+export { formatTime, urlResolve, getDomInfo }
