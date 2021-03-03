@@ -159,21 +159,18 @@ Page({
     })
   },
 
-  onLike() {
+  onToggleLike() {
     const { id, likeStatus } = this.data
     const uri = `/favor${likeStatus ? '/cancel' : ''}`
 
-    bookModel
-      .setLike({
-        uri,
-        id,
-        type: 400,
+    bookModel.setLike({ uri, id, type: 400 }).then((res) => {
+      this.setData({
+        likeStatus: !likeStatus,
       })
-      .then((res) => {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none',
-        })
+      wx.showToast({
+        title: res.msg,
+        icon: 'none',
       })
+    })
   },
 })
