@@ -1,13 +1,16 @@
 <!--pages/book/book.wxml-->
 <view class="container">
   <view class="books-header">
-    <view class="search-container">
+    <view class="search-container" bind:tap="onSearch">
       <image class="search-image" src="/assets/images/icon/search.png"></image>
       <text>搜索书籍</text>
     </view>
   </view>
 
-  <view class="sub-container">
+  <v-search wx:if="{{ isSearching }}" hotKeys="{{ hotSearchKeys }}" bind:myCancel="onSearchCancel"
+            bind:myGetHotKeys="onGetHotSearchKeys" />
+
+  <view wx:if="{{ !isSearching }}" class="sub-container">
     <image class="books-hot" src="/assets/images/book/hot.png"></image>
 
     <view class="books-container">

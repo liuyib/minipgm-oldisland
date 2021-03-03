@@ -1,0 +1,5 @@
+Behavior({
+  data: {},
+
+  methods: {},
+})

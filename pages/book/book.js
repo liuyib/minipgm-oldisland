@@ -8,14 +8,19 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 书籍数据
     books: [],
+    // 热搜关键词
+    hotSearchKeys: [],
+    // 是否正在搜索
+    isSearching: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this._getHotList()
+    this._getHotBookList()
   },
 
   /**
@@ -61,7 +66,27 @@ Page({
     })
   },
 
-  _getHotList() {
+  onSearch() {
+    this.setData({
+      isSearching: true,
+    })
+  },
+
+  onSearchCancel() {
+    this.setData({
+      isSearching: false,
+    })
+  },
+
+  onGetHotSearchKeys() {
+    bookModel.getHotSearchKeys().then((res) => {
+      this.setData({
+        hotSearchKeys: res.data,
+      })
+    })
+  },
+
+  _getHotBookList() {
     bookModel.getHotList().then((res) => {
       this.setData({
         books: res.data,

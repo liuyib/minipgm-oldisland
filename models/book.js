@@ -50,6 +50,13 @@ class BookModel extends HTTP {
       type,
     })
   }
+
+  getHotSearchKeys() {
+    return this.request({
+      uri: `/book/hot_keyword`,
+      method: 'GET',
+    })
+  }
 }
 
 export { BookModel }
