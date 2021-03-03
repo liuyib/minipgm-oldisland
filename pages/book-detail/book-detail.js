@@ -69,6 +69,51 @@ Page({
    */
   onShareAppMessage: function () {},
 
+  onComment() {
+    this.setData({
+      isCommenting: true,
+    })
+  },
+
+  onCancel() {
+    this.setData({
+      isCommenting: false,
+    })
+  },
+
+  onSubmitComment(event) {
+    const { id } = this.data
+    const { value } = event.detail
+
+    bookModel
+      .setShortComment({
+        artId: id,
+        content: value,
+      })
+      .then((res) => {
+        this._updateComments(value)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        })
+      })
+  },
+
+  onToggleLike() {
+    const { id, likeStatus } = this.data
+    const uri = `/favor${likeStatus ? '/cancel' : ''}`
+
+    bookModel.setLike({ uri, id, type: 400 }).then((res) => {
+      this.setData({
+        likeStatus: !likeStatus,
+      })
+      wx.showToast({
+        title: res.msg,
+        icon: 'none',
+      })
+    })
+  },
+
   _getDetail(id) {
     wx.showLoading({ title: '加载中...' })
 
@@ -103,36 +148,6 @@ Page({
       })
   },
 
-  onComment() {
-    this.setData({
-      isCommenting: true,
-    })
-  },
-
-  onCancel() {
-    this.setData({
-      isCommenting: false,
-    })
-  },
-
-  onSubmitComment(event) {
-    const { id } = this.data
-    const { value } = event.detail
-
-    bookModel
-      .setShortComment({
-        artId: id,
-        content: value,
-      })
-      .then((res) => {
-        this._updateComments(value)
-        wx.showToast({
-          title: res.msg,
-          icon: 'none',
-        })
-      })
-  },
-
   /**
    * 同步短评数据到页面上
    * @param {string} added 新添加的短评
@@ -156,21 +171,6 @@ Page({
     this.setData({
       comments,
       isCommenting: false,
-    })
-  },
-
-  onToggleLike() {
-    const { id, likeStatus } = this.data
-    const uri = `/favor${likeStatus ? '/cancel' : ''}`
-
-    bookModel.setLike({ uri, id, type: 400 }).then((res) => {
-      this.setData({
-        likeStatus: !likeStatus,
-      })
-      wx.showToast({
-        title: res.msg,
-        icon: 'none',
-      })
     })
   },
 })

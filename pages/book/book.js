@@ -53,19 +53,19 @@ Page({
    */
   onShareAppMessage: function () {},
 
-  _getHotList() {
-    bookModel.getHotList().then((res) => {
-      this.setData({
-        books: res.data,
-      })
-    })
-  },
-
   onDetail(event) {
     const { id } = event.detail
 
     wx.navigateTo({
       url: `/pages/book-detail/book-detail?id=${id}`,
+    })
+  },
+
+  _getHotList() {
+    bookModel.getHotList().then((res) => {
+      this.setData({
+        books: res.data,
+      })
     })
   },
 })
