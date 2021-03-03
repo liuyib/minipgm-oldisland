@@ -14,7 +14,7 @@
 .like-nums {
   display: inline-block;
   vertical-align: top;
-  line-height: 24rpx;
+  margin-left: 2rpx;
   font-size: 24rpx;
   color: #bbb;
 }
