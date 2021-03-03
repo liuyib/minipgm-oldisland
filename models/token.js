@@ -41,6 +41,7 @@ class TokenModel extends HTTP {
             })
             .then((res) => {
               wx.setStorage({ key: 'token', data: res.data })
+              _this._clearResendQueue()
 
               if (typeof success === 'function') {
                 success()
@@ -72,6 +73,24 @@ class TokenModel extends HTTP {
     }).catch(() => {
       this.getFromServer()
     })
+  }
+
+  /**
+   * 清空 HTTP 请求重发队列
+   * @api private
+   * @returns
+   */
+  _clearResendQueue() {
+    const { resendQueue } = getApp().globalData
+
+    while (resendQueue.length) {
+      const req = resendQueue.shift()
+
+      this.wxrequest({
+        ...req,
+        isRefreshToken: false,
+      })
+    }
   }
 }
 
