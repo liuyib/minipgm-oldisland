@@ -23,7 +23,8 @@ class ClassicModel extends HTTP {
 
     if (cache) {
       const { type, id } = cache.data
-      const like = await likeModel.getLike(`/classic/favor/${type}/${id}`)
+      const likeUrl = `/classic/favor/${type}/${id}`
+      const like = await likeModel.getLike(likeUrl)
 
       Object.assign(cache.data, like.data)
 

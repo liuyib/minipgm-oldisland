@@ -25,7 +25,7 @@ Component({
   },
 
   lifetimes: {
-    attached: function () {
+    attached() {
       this._listenBGM()
       this._resetPlay()
     },
@@ -35,31 +35,39 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onPlay: function () {
+    onTogglePlay() {
       const { isPlaying, data } = this.data
 
       if (isPlaying) {
-        bgm.pause()
+        this._pauseBGM()
       } else {
-        this._setBGM(bgm, data)
+        this._playBGM(data)
       }
 
+      this._togglePlay()
+    },
+
+    _togglePlay() {
       this.setData({
-        isPlaying: !isPlaying,
+        isPlaying: !this.data.isPlaying,
       })
     },
 
-    _setBGM(bgmObj, data) {
+    _playBGM(data) {
       // TODO: 数据库增加歌手字段（singer）
       const { url, title, image, singer } = data
 
-      Object.assign(bgmObj, {
+      Object.assign(bgm, {
         src: url,
         title,
         epname: title,
         singer,
         coverImgUrl: image,
       })
+    },
+
+    _pauseBGM() {
+      bgm.pause()
     },
 
     _listenBGM() {

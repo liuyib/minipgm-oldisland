@@ -23,7 +23,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onClick: function () {
+    onClick() {
       const { text } = this.data
       this.triggerEvent('myTap', { value: text }, {})
     },
