@@ -70,36 +70,36 @@ Page({
   onShareAppMessage: function () {},
 
   _getDetail(id) {
-    bookModel
-      .getDetail(id)
+    wx.showLoading({ title: '加载中...' })
+
+    Promise.all([
+      bookModel.getDetail(id),
+      bookModel.getLike(id),
+      bookModel.getShortComment(id),
+    ])
       .then((res) => {
+        const detail = res[0].data
+        const like = res[1].data
+        const { comments } = res[2].data
+
+        comments.sort((a, b) => b.nums - a.nums)
+
         this.setData({
-          detail: res.data,
-        })
-
-        bookModel.getLike(id).then((res) => {
-          const { data } = res
-
-          this.setData({
-            likeStatus: !!data.like_status,
-            likeNums: data.fav_nums,
-          })
-        })
-        bookModel.getShortComment(id).then((res) => {
-          const { comment } = res.data
-
-          comment.sort((a, b) => b.nums - a.nums)
-          this.setData({
-            comments: comment,
-            isNoComment: comment && !comment.length,
-          })
+          detail,
+          likeStatus: !!like.like_status,
+          likeNums: like.fav_nums,
+          comments,
+          isNoComment: comments && !comments.length,
         })
       })
-      .catch((err) => {
+      .catch(() => {
         wx.showToast({
-          title: err,
+          title: '数据加载出错',
           icon: 'none',
         })
+      })
+      .finally(() => {
+        wx.hideLoading()
       })
   },
 
