@@ -1,4 +1,4 @@
-const formatNumber = (n) => {
+const _formatNumber = (n) => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
@@ -11,12 +11,12 @@ const formatTime = (date) => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return `${[year, month, day].map(formatNumber).join('/')} ${[
+  return `${[year, month, day].map(_formatNumber).join('/')} ${[
     hour,
     minute,
     second,
   ]
-    .map(formatNumber)
+    .map(_formatNumber)
     .join(':')}`
 }
 
@@ -26,10 +26,10 @@ const formatTime = (date) => {
  * @param {Object} [option]            - 参数
  * @param {Object} [option.left=true]  - 是否删除左端的斜线
  * @param {Object} [option.right=true] - 是否删除右端的斜线
- * @example trimSlash('/foo/bar/', { left: false }) => '/foo/bar'
+ * @example _trimSlash('/foo/bar/', { left: false }) => '/foo/bar'
  * @returns {string} 处理后的字符串
  */
-const trimSlash = (str, option) => {
+const _trimSlash = (str, option) => {
   const op = {
     left: (option && option.left) || true,
     right: (option && option.right) || true,
@@ -49,10 +49,10 @@ const trimSlash = (str, option) => {
  * @returns {string}
  */
 const urlResolve = (base, ...paths) => {
-  let result = `${trimSlash(base, { left: false })}/`
+  let result = `${_trimSlash(base, { left: false })}/`
 
   for (const path of paths) {
-    result += `${trimSlash(path)}`
+    result += `${_trimSlash(path)}`
   }
 
   return result
@@ -84,4 +84,29 @@ const getDomInfo = ({ ctx, selector, fields = {}, ret }) => {
     .exec()
 }
 
-export { formatTime, urlResolve, getDomInfo }
+/**
+ * 将函数 Promise 化（如果函数已经是 Promise，则直接返回）
+ * @param {Function} func - 函数
+ * @returns {Promise}
+ */
+const promisify = (func) => {
+  if (func instanceof Promise) {
+    return func
+  }
+
+  return (params = {}) => {
+    return new Promise((resolve, reject) => {
+      func({
+        ...params,
+        success(res) {
+          resolve(res)
+        },
+        fail(err) {
+          reject(err)
+        },
+      })
+    })
+  }
+}
+
+export { formatTime, urlResolve, getDomInfo, promisify }
