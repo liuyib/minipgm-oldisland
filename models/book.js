@@ -25,6 +25,14 @@ class BookModel extends HTTP {
     })
   }
 
+  setLike({ uri, id, type }) {
+    return likeModel.setLike({
+      uri,
+      id,
+      type,
+    })
+  }
+
   getShortComment(id) {
     return this.request({
       uri: `/book/short_comment/${id}`,
@@ -39,40 +47,6 @@ class BookModel extends HTTP {
       data: {
         artId,
         content,
-      },
-    })
-  }
-
-  setLike({ uri, id, type }) {
-    return likeModel.setLike({
-      uri,
-      id,
-      type,
-    })
-  }
-
-  getHotSearchKeys() {
-    return this.request({
-      uri: `/book/hot_keyword`,
-      method: 'GET',
-    })
-  }
-
-  /**
-   * 搜索书籍
-   * @param {Object} param
-   * @param {string} param.q     - 关键词
-   * @param {number} param.start - 数据开始索引
-   * @param {number} param.count - 获取数量
-   */
-  getSearch({ q, start, count }) {
-    return this.request({
-      uri: `/book/search`,
-      method: 'GET',
-      data: {
-        q,
-        start,
-        count,
       },
     })
   }

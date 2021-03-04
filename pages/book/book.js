@@ -10,14 +10,6 @@ Page({
   data: {
     // 书籍数据
     books: [],
-    // 热搜关键词
-    hotSearchKeys: [],
-    searchResults: [],
-    pagination: {
-      start: 0,
-      count: 0,
-      total: 0,
-    },
     // 是否正在搜索
     isSearching: false,
   },
@@ -72,35 +64,11 @@ Page({
     })
   },
 
-  async onGetHotSearchKeys() {
-    const res = await bookModel.getHotSearchKeys()
-    this.setData({ hotSearchKeys: res.data })
-  },
-
   onToggleSearch() {
     const { isSearching } = this.data
 
     this.setData({
       isSearching: !isSearching,
-    })
-  },
-
-  async onSearch(event) {
-    const { value } = event.detail
-    const res = await bookModel.getSearch({
-      q: value,
-      start: 0,
-      count: 20,
-    })
-    const { data, start, count, total } = res
-
-    this.setData({
-      searchResults: data,
-      pagination: {
-        start,
-        count,
-        total,
-      },
     })
   },
 

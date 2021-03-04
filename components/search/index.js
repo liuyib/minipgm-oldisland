@@ -1,24 +1,13 @@
+import { SearchModel } from '../_models/search'
+
+const searchModel = new SearchModel()
+
 // components/search/index.js
 Component({
   /**
    * 组件的属性列表
    */
-  properties: {
-    // 热搜关键词
-    hotKeys: {
-      type: Array,
-    },
-    // 搜索结果
-    results: {
-      type: Array,
-      observer(vals) {
-        console.log(vals)
-        this.setData({
-          searchLoading: false,
-        })
-      },
-    },
-  },
+  properties: {},
 
   /**
    * 组件的初始数据
@@ -26,8 +15,17 @@ Component({
   data: {
     // 搜索参数
     q: '',
+    // 热搜关键词
+    hotKeys: [],
     // 历史搜索关键词
     historyKeys: [],
+    // 搜索结果
+    results: [],
+    pagination: {
+      start: 0,
+      count: 0,
+      total: 0,
+    },
     // 是否确认搜索
     isConfirm: false,
     // 搜索的 Loading
@@ -36,11 +34,8 @@ Component({
 
   lifetimes: {
     attached() {
-      this.triggerEvent('myGetHotKeys', {}, {})
-
-      this.setData({
-        historyKeys: wx.getStorageSync('search-book-history'),
-      })
+      this._getHistory()
+      this._getHotKeys()
     },
   },
 
@@ -55,16 +50,68 @@ Component({
     onConfirm(event) {
       const { value } = event.detail
 
-      this.triggerEvent('mySearch', { value }, {})
-      this.setData({
-        q: value,
-        isConfirm: true,
-        searchLoading: true,
-      })
-      this._setSearchHistory({ value })
+      this._setResultShow(true)
+      this._setQuery(value)
+      this._setLoading(true)
+      this._getSearch()
+      this._setHistory({ value })
     },
 
-    _setSearchHistory({ value, key = 'search-book-history', maxCount = 10 }) {
+    onDelete() {
+      this._setResultShow(false)
+      this._setQuery('')
+      this._clearResult()
+    },
+
+    onItemClick(event) {
+      this.triggerEvent('myItemClick', { ...event.detail }, {})
+    },
+
+    _getSearch() {
+      const { q } = this.data
+
+      // TODO: 加载更多
+      searchModel
+        .getSearch({ q, start: 0, count: 20 })
+        .then((res) => {
+          const { data, start, count, total } = res
+
+          this.setData({
+            results: data,
+            pagination: { start, count, total },
+          })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this._setLoading(false)
+        })
+    },
+
+    _clearResult() {
+      this.setData({
+        results: [],
+      })
+    },
+
+    _setQuery(val) {
+      this.setData({
+        q: val,
+      })
+    },
+
+    _setResultShow(val) {
+      this.setData({
+        isConfirm: val,
+      })
+    },
+
+    _setLoading(val) {
+      this.setData({
+        searchLoading: val,
+      })
+    },
+
+    _setHistory({ value, key = 'search-book-history', maxCount = 10 }) {
       let keywords = wx.getStorageSync(key)
 
       if (Array.isArray(keywords)) {
@@ -82,17 +129,15 @@ Component({
       wx.setStorage({ key, data: keywords })
     },
 
-    onDelete() {
+    _getHistory(key = 'search-book-history') {
       this.setData({
-        q: '',
-        results: [],
-        isConfirm: false,
+        historyKeys: wx.getStorageSync(key),
       })
     },
 
-    onBookDetail(event) {
-      const { id } = event.detail
-      this.triggerEvent('myBookDetail', { id }, {})
+    async _getHotKeys() {
+      const res = await searchModel.getHotKeys()
+      this.setData({ hotKeys: res.data })
     },
   },
 })

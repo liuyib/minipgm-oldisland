@@ -37,7 +37,7 @@
   <view class="books-container" wx:if="{{ isConfirm }}">
     <block wx:for="{{ results }}" wx:key="id">
       <v-book class="books-item" book="{{ item }}" isShowLike="{{ false }}"
-              bind:myDetail="onBookDetail"></v-book>
+              bind:myDetail="onItemClick"></v-book>
     </block>
   </view>
 
