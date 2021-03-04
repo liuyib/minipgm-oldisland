@@ -11,6 +11,12 @@ Component({
     // 搜索结果
     results: {
       type: Array,
+      observer(vals) {
+        console.log(vals)
+        this.setData({
+          searchLoading: false,
+        })
+      },
     },
   },
 
@@ -24,6 +30,8 @@ Component({
     historyKeys: [],
     // 是否确认搜索
     isConfirm: false,
+    // 搜索的 Loading
+    searchLoading: false,
   },
 
   lifetimes: {
@@ -49,8 +57,9 @@ Component({
 
       this.triggerEvent('mySearch', { value }, {})
       this.setData({
-        isConfirm: true,
         q: value,
+        isConfirm: true,
+        searchLoading: true,
       })
       this._setSearchHistory({ value })
     },

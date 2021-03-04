@@ -47,13 +47,13 @@
 }
 
 .books-container {
-  width: 570rpx;
-  margin-top: 100rpx;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 90rpx 0 90rpx;
   justify-content: space-between;
+  width: 570rpx;
+  margin-top: 100rpx;
+  padding: 40rpx 90rpx 10rpx 90rpx;
 }
 
 .loading {
