@@ -79,12 +79,22 @@ class HTTP {
           }
         } else {
           reject(msg)
+
+          wx.showToast({
+            title: String(msg),
+            icon: 'none',
+          })
         }
       },
       fail: (err) => {
         // 请求被取消时，不返回错误信息
         if (err && err.errMsg !== 'request:fail abort') {
           reject(err)
+
+          wx.showToast({
+            title: String(err),
+            icon: 'none',
+          })
         }
       },
     })
