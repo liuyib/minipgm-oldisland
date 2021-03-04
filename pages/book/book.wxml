@@ -9,7 +9,7 @@
 
   <v-search wx:if="{{ isSearching }}" hotKeys="{{ hotSearchKeys }}" results="{{ searchResults }}"
             bind:myGetHotKeys="onGetHotSearchKeys" bind:myCancel="onSearchCancel"
-            bind:mySearch="onSearch" />
+            bind:mySearch="onSearch" bind:myBookDetail="onDetail" />
 
   <view wx:if="{{ !isSearching }}" class="sub-container">
     <image class="books-hot" src="/assets/images/book/hot.png"></image>

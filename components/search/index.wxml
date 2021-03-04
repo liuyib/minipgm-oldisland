@@ -38,8 +38,7 @@
 
   <view class="books-container" wx:if="{{ isConfirm }}">
     <block wx:for="{{ results }}" wx:key="id">
-      <!-- TODO: bind:myDetail="onBookDetail" -->
-      <v-book class="books-item" book="{{ item }}"></v-book>
+      <v-book class="books-item" book="{{ item }}" bind:myDetail="onBookDetail"></v-book>
     </block>
   </view>
 

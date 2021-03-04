@@ -55,7 +55,8 @@ Component({
     },
 
     onBookDetail(event) {
-      console.log(event)
+      const { id } = event.detail
+      this.triggerEvent('myBookDetail', { id }, {})
     },
   },
 })
