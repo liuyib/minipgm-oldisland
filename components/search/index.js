@@ -58,6 +58,7 @@ Component({
     },
 
     onDelete() {
+      this._getHistory()
       this._setResultShow(false)
       this._setQuery('')
       this._clearResult()
