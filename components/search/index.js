@@ -28,6 +28,8 @@ Component({
     },
     // 是否确认搜索
     isConfirm: false,
+    // 是否搜索不到数据
+    isEmpty: false,
     // 搜索的 Loading
     searchLoading: false,
   },
@@ -77,10 +79,8 @@ Component({
         .then((res) => {
           const { data, start, count, total } = res
 
-          this.setData({
-            results: data,
-            pagination: { start, count, total },
-          })
+          this._setResult(data)
+          this.setData({ pagination: { start, count, total } })
         })
         .catch(() => {})
         .finally(() => {
@@ -88,8 +88,16 @@ Component({
         })
     },
 
+    _setResult(data) {
+      this.setData({
+        isEmpty: data && data.length === 0,
+        results: data,
+      })
+    },
+
     _clearResult() {
       this.setData({
+        isEmpty: false,
         results: [],
       })
     },
