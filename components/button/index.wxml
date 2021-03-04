@@ -1,0 +1,4 @@
+<!--components/button/index.wxml-->
+<view>
+  <slot name="image"></slot>
+</view>
