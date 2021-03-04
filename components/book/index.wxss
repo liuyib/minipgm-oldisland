@@ -5,6 +5,7 @@
   width: 240rpx;
   height: 360rpx;
   border-radius: 3rpx;
+  margin: 0 auto;
   box-shadow: 2px 2px 3px 1px #e3e3e3;
 }
 

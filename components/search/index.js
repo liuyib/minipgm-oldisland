@@ -66,6 +66,10 @@ Component({
       this._clearResult()
     },
 
+    onGetMore(event) {
+      console.log(`onGetMore ~ event`, event)
+    },
+
     onItemClick(event) {
       this.triggerEvent('myItemClick', { ...event.detail }, {})
     },

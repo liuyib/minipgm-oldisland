@@ -34,12 +34,16 @@
     </view>
   </view>
 
-  <view class="books-container" wx:if="{{ isConfirm }}">
-    <block wx:for="{{ results }}" wx:key="id">
-      <v-book class="books-item" book="{{ item }}" isShowLike="{{ false }}"
-              bind:myDetail="onItemClick"></v-book>
-    </block>
-  </view>
+  <scroll-view class="books-container" wx:if="{{ isConfirm }}" enable-flex="{{ true }}"
+               scroll-y="{{ true }}" enable-back-to-top="{{ true }}"
+               scroll-with-animation="{{ true }}" bind:scrolltolower="onGetMore">
+    <view class="books-wrapper">
+      <block wx:for="{{ results }}" wx:key="id">
+        <v-book class="books-item" book="{{ item }}" isShowLike="{{ false }}"
+                bind:myDetail="onItemClick"></v-book>
+      </block>
+    </view>
+  </scroll-view>
 
   <v-loading class="loading-center" wx:if="{{ searchLoading }}" />
 

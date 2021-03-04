@@ -35,10 +35,6 @@
   margin-left: 20rpx;
 }
 
-.books-item {
-  margin-bottom: 25rpx;
-}
-
 .cancel-img {
   width: 14px;
   height: 14px;
@@ -47,13 +43,23 @@
 }
 
 .books-container {
+  width: 100%;
+  /* - 100rpx == margin-top: 100rpx */
+  height: calc(100vh - 100rpx);
+  margin-top: 100rpx;
+}
+
+.books-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  width: 570rpx;
-  margin-top: 100rpx;
-  padding: 40rpx 90rpx 10rpx 90rpx;
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.books-item {
+  width: 50%;
+  margin: 20rpx 0;
 }
 
 .loading {
