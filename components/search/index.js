@@ -74,8 +74,11 @@ Component({
     },
 
     onDelete() {
-      // TODO: 清除搜索，1. 清空搜索框，2. 清空列表数据
-      // 3.将搜索关键词加入缓存（搜索历史）4. 重置无线加载的相关参数和数据
+      this.setData({
+        q: '',
+        results: [],
+        isConfirm: false,
+      })
     },
 
     onBookDetail(event) {

@@ -5,7 +5,7 @@
       <image class="icon" src="/assets/images/icon/search.png" />
       <input class="bar" placeholder-class="in-bar" placeholder="请输入书籍名" auto-focus="true"
              value="{{ q }}" bind:confirm="onConfirm" />
-      <image bind:tap="onDelete" class="cancel-img" src="/assets/images/icon/cancel.png" />
+      <image class="cancel-img" src="/assets/images/icon/cancel.png" bind:tap="onDelete" />
     </view>
     <view class="cancel" bind:tap="onCancel">取消</view>
   </view>
