@@ -36,12 +36,14 @@
     </view>
   </view>
 
-  <!-- <view class="books-container" wx:if="{{ isConfirm }}">
-    <block wx:for="{{ dataArray }}" wx:key="{{ item.id }}">
-      <v-book class="books-item" show-like="{{ false }}" book="{{ item }}" class="book" />
+  <view class="books-container" wx:if="{{ isConfirm }}">
+    <block wx:for="{{ results }}" wx:key="id">
+      <!-- TODO: bind:myDetail="onBookDetail" -->
+      <v-book class="books-item" book="{{ item }}"></v-book>
     </block>
   </view>
-  <v-loading class="loading" wx:if="{{ loading }}" />
+
+  <!--<v-loading class="loading" wx:if="{{ loading }}" />
   <v-loading class="loading-center" wx:if="{{ loadingCenter }}" />
   <text wx:if="{{ empty }}" class="empty-tip">没有搜索到书籍</text> -->
 </view>

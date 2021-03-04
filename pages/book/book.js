@@ -12,6 +12,12 @@ Page({
     books: [],
     // 热搜关键词
     hotSearchKeys: [],
+    searchResults: [],
+    pagination: {
+      start: 0,
+      count: 0,
+      total: 0,
+    },
     // 是否正在搜索
     isSearching: false,
   },
@@ -66,7 +72,7 @@ Page({
     })
   },
 
-  onSearch() {
+  onSearchShow() {
     this.setData({
       isSearching: true,
     })
@@ -76,6 +82,29 @@ Page({
     this.setData({
       isSearching: false,
     })
+  },
+
+  onSearch(event) {
+    const { value } = event.detail
+
+    bookModel
+      .getSearch({
+        q: value,
+        start: 0,
+        count: 20,
+      })
+      .then((res) => {
+        const { data, start, count, total } = res
+
+        this.setData({
+          searchResults: data,
+          pagination: {
+            start,
+            count,
+            total,
+          },
+        })
+      })
   },
 
   onGetHotSearchKeys() {

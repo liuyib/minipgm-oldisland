@@ -4,7 +4,12 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    // 热搜关键词
     hotKeys: {
+      type: Array,
+    },
+    // 搜索结果
+    results: {
       type: Array,
     },
   },
@@ -35,14 +40,22 @@ Component({
       this.triggerEvent('myCancel', {}, {})
     },
 
-    onConfirm(val) {
-      // TODO: 回车后搜索
-      console.log(`onConfirm ~ val`, val)
+    onConfirm(event) {
+      const { value } = event.detail
+
+      this.triggerEvent('mySearch', { value }, {})
+      this.setData({
+        isConfirm: true,
+      })
     },
 
     onDelete() {
       // TODO: 清除搜索，1. 清空搜索框，2. 清空列表数据
       // 3.将搜索关键词加入缓存（搜索历史）4. 重置无线加载的相关参数和数据
+    },
+
+    onBookDetail(event) {
+      console.log(event)
     },
   },
 })
