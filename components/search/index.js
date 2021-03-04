@@ -15,23 +15,26 @@ Component({
   data: {
     // 搜索参数
     q: '',
+    // 获取数据的开始索引（从第几条开始获取）
+    start: 0,
+    // 该关键词能搜到的数据总数
+    total: 0,
+    // 搜索结果
+    results: [],
     // 热搜关键词
     hotKeys: [],
     // 历史搜索关键词
     historyKeys: [],
-    // 搜索结果
-    results: [],
-    pagination: {
-      start: 0,
-      count: 0,
-      total: 0,
-    },
     // 是否确认搜索
     isConfirm: false,
     // 是否搜索不到数据
     isEmpty: false,
     // 搜索的 Loading
     searchLoading: false,
+    // 是否锁住加载更多（防止短时间内频繁请求）
+    isLoadMoreLocked: false,
+    // 是否已经加载全部数据
+    isAllLoaded: false,
   },
 
   lifetimes: {
@@ -62,12 +65,16 @@ Component({
     onDelete() {
       this._getHistory()
       this._setResultShow(false)
-      this._setQuery('')
       this._clearResult()
     },
 
-    onGetMore(event) {
-      console.log(`onGetMore ~ event`, event)
+    onGetMore() {
+      const { isAllLoaded } = this.data
+
+      if (!isAllLoaded) {
+        this._setLoadMoreLock(true)
+        this._getSearch()
+      }
     },
 
     onItemClick(event) {
@@ -75,34 +82,48 @@ Component({
     },
 
     _getSearch() {
-      const { q } = this.data
+      const { q, start } = this.data
 
-      // TODO: 加载更多
       searchModel
-        .getSearch({ q, start: 0, count: 20 })
+        .getSearch({ q, start, count: 20 })
         .then((res) => {
-          const { data, start, count, total } = res
-
-          this._setResult(data)
-          this.setData({ pagination: { start, count, total } })
+          this._setResult(res)
         })
         .catch(() => {})
         .finally(() => {
           this._setLoading(false)
+          this._setLoadMoreLock(false)
         })
     },
 
-    _setResult(data) {
+    _setResult(res) {
+      const { results } = this.data
+      const { data, start, count, total } = res
+      const nextStart = start + count
+      const isEmpty = count === 0 && total === 0
+      const isAllLoaded = nextStart === total
+
+      results.push(...data)
+
       this.setData({
-        isEmpty: data && data.length === 0,
-        results: data,
+        // 计算下一次开始获取数据的索引
+        start: nextStart,
+        total,
+        results,
+        isEmpty,
+        isAllLoaded,
       })
     },
 
+    // TODO: 用户通过键盘删除输入的内容，也要执行 _clearResult
     _clearResult() {
       this.setData({
-        isEmpty: false,
+        q: '',
+        start: 0,
+        total: 0,
         results: [],
+        isEmpty: false,
+        isAllLoaded: false,
       })
     },
 
@@ -121,6 +142,12 @@ Component({
     _setLoading(val) {
       this.setData({
         searchLoading: val,
+      })
+    },
+
+    _setLoadMoreLock(val) {
+      this.setData({
+        isLoadMoreLocked: val,
       })
     },
 

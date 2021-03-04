@@ -80,6 +80,13 @@
   top: 50%;
 }
 
+.all-tip {
+  width: 100%;
+  padding: 15rpx;
+  text-align: center;
+  color: #999;
+}
+
 .icon {
   width: 14px;
   height: 14px;

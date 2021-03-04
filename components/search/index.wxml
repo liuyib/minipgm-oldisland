@@ -42,6 +42,8 @@
         <v-book class="books-item" book="{{ item }}" isShowLike="{{ false }}"
                 bind:myDetail="onItemClick"></v-book>
       </block>
+
+      <text wx:if="{{ isAllLoaded }}" class="all-tip">没有更多数据了</text>
     </view>
   </scroll-view>
 
