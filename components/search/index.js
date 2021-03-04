@@ -44,9 +44,7 @@ Component({
       const { value } = event.detail
 
       this.triggerEvent('mySearch', { value }, {})
-      this.setData({
-        isConfirm: true,
-      })
+      this.setData({ isConfirm: true })
     },
 
     onDelete() {

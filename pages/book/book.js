@@ -72,46 +72,35 @@ Page({
     })
   },
 
-  onSearchShow() {
+  async onGetHotSearchKeys() {
+    const res = await bookModel.getHotSearchKeys()
+    this.setData({ hotSearchKeys: res.data })
+  },
+
+  onToggleSearch() {
+    const { isSearching } = this.data
+
     this.setData({
-      isSearching: true,
+      isSearching: !isSearching,
     })
   },
 
-  onSearchCancel() {
-    this.setData({
-      isSearching: false,
-    })
-  },
-
-  onSearch(event) {
+  async onSearch(event) {
     const { value } = event.detail
+    const res = await bookModel.getSearch({
+      q: value,
+      start: 0,
+      count: 20,
+    })
+    const { data, start, count, total } = res
 
-    bookModel
-      .getSearch({
-        q: value,
-        start: 0,
-        count: 20,
-      })
-      .then((res) => {
-        const { data, start, count, total } = res
-
-        this.setData({
-          searchResults: data,
-          pagination: {
-            start,
-            count,
-            total,
-          },
-        })
-      })
-  },
-
-  onGetHotSearchKeys() {
-    bookModel.getHotSearchKeys().then((res) => {
-      this.setData({
-        hotSearchKeys: res.data,
-      })
+    this.setData({
+      searchResults: data,
+      pagination: {
+        start,
+        count,
+        total,
+      },
     })
   },
 
