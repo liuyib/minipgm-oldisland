@@ -29,6 +29,10 @@ Component({
   lifetimes: {
     attached() {
       this.triggerEvent('myGetHotKeys', {}, {})
+
+      this.setData({
+        historyKeys: wx.getStorageSync('search-book-history'),
+      })
     },
   },
 
@@ -45,6 +49,25 @@ Component({
 
       this.triggerEvent('mySearch', { value }, {})
       this.setData({ isConfirm: true })
+      this._setSearchHistory({ value })
+    },
+
+    _setSearchHistory({ value, key = 'search-book-history', maxCount = 10 }) {
+      let keywords = wx.getStorageSync(key)
+
+      if (Array.isArray(keywords)) {
+        if (!keywords.includes(value)) {
+          keywords.unshift(value)
+
+          if (keywords.length > maxCount) {
+            keywords.length = maxCount
+          }
+        }
+      } else {
+        keywords = [value]
+      }
+
+      wx.setStorage({ key, data: keywords })
     },
 
     onDelete() {

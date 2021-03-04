@@ -16,7 +16,6 @@
         <view class="chunk"></view>
         <text>历史搜索</text>
       </view>
-
       <view class="tags">
         <v-tag class="tag" wx:for="{{ historyKeys }}" wx:key="item" text="{{ item }}"
                bind:myTap="onConfirm" />
@@ -28,7 +27,6 @@
         <view class="chunk"></view>
         <text>热门搜索</text>
       </view>
-
       <view class="tags">
         <v-tag class="tag" wx:for="{{ hotKeys }}" wx:key="item" text="{{ item }}"
                bind:myTap="onConfirm" />
