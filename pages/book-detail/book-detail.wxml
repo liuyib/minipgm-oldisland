@@ -82,7 +82,7 @@
     </block>
   </view>
 
-  <input class="post" focus="{{ isCommenting }}" confirm-type="send"
+  <input class="post" confirm-type="send" focus="{{ isCommenting }}"
          maxlength="{{ const.SHORT_COMMENT.MAX_LENGTH }}"
          placeholder="短评最多 {{ const.SHORT_COMMENT.MAX_LENGTH }} 个字"
          bind:confirm="onSubmitComment"></input>

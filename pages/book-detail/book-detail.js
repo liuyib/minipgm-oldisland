@@ -70,15 +70,11 @@ Page({
   onShareAppMessage: function () {},
 
   onComment() {
-    this.setData({
-      isCommenting: true,
-    })
+    this._setCommenting(true)
   },
 
   onCancel() {
-    this.setData({
-      isCommenting: false,
-    })
+    this._setCommenting(false)
   },
 
   onSubmitComment(event) {
@@ -168,9 +164,13 @@ Page({
       comments.push({ content: added, nums: 1 })
     }
 
+    this.setData({ comments })
+    this._setCommenting(false)
+  },
+
+  _setCommenting(val) {
     this.setData({
-      comments,
-      isCommenting: false,
+      isCommenting: val,
     })
   },
 })
