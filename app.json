@@ -35,5 +35,7 @@
         "selectedIconPath": "assets/images/tab/my@highlight.png"
       }
     ]
-  }
+  },
+  "resizable": true,
+  "lazyCodeLoading": "requiredComponents"
 }
