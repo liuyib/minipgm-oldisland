@@ -88,6 +88,7 @@ Component({
 
     onFocus() {
       this._setResultShow(false)
+      this._getHistory()
       this._clearResult()
     },
 
