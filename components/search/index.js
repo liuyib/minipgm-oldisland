@@ -137,7 +137,7 @@ Component({
       let filteredVal = val.trim()
 
       // 只允许输入汉字（/\p{sc=Han}/）和大小写英文字母
-      filteredVal = filteredVal.replace(/[^a-zA-Z\p{sc=Han}]/, '')
+      filteredVal = filteredVal.replace(/[^a-zA-Z\p{sc=Han}]/gu, '')
 
       return filteredVal
     },
