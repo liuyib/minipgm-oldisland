@@ -57,6 +57,11 @@ Component({
       this.triggerEvent('myCancel', {}, {})
     },
 
+    onFocus() {
+      this._setResultShow(false)
+      this._clearResult()
+    },
+
     onConfirm(event) {
       const { value } = event.detail
 
@@ -71,6 +76,7 @@ Component({
       this._setResultShow(false)
       this._setInputFocus(true)
       this._getHistory()
+      this._setQuery('')
       this._clearResult()
     },
 
@@ -123,10 +129,8 @@ Component({
       })
     },
 
-    // TODO: 用户通过键盘删除输入的内容，也要执行 _clearResult
     _clearResult() {
       this.setData({
-        q: '',
         start: 0,
         total: 0,
         results: [],
