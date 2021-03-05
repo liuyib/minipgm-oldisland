@@ -1,4 +1,5 @@
 import { HTTP } from '../utils/request'
+import { promisify } from '../utils/util'
 
 class TokenModel {
   /**
@@ -19,42 +20,32 @@ class TokenModel {
   /**
    * 从服务器获取 Token
    * @api public
-   * @param {Object} [option]           - 可选参数
-   * @param {Function} [option.success] - 成功回调
    * @returns
    */
-  getFromServer({ success } = {}) {
-    const _this = this
+  async getFromServer() {
+    try {
+      const res = await promisify(wx.login)()
 
-    wx.login({
-      success(res) {
-        if (res.code) {
-          HTTP.request({
-            uri: '/token',
-            method: 'POST',
-            data: {
-              account: res.code,
-              // type: 100 表示小程序端登录
-              type: 100,
-            },
-          })
-            .then((res) => {
-              wx.setStorage({ key: 'token', data: res.data })
-              _this._clearResendQueue()
+      if (!res || !res.code) throw res
 
-              if (typeof success === 'function') {
-                success()
-              }
-            })
-            .catch((err) => {
-              wx.showToast({
-                title: err.message || err.errMsg || 'token 获取失败',
-                icon: 'none',
-              })
-            })
-        }
-      },
-    })
+      const token = await HTTP.request({
+        uri: '/token',
+        method: 'POST',
+        data: {
+          account: res.code,
+          // type: 100 表示小程序端登录
+          type: 100,
+        },
+      })
+
+      wx.setStorage({ key: 'token', data: token.data })
+      this._clearResendQueue()
+    } catch (err) {
+      wx.showToast({
+        title: err.message || err.errMsg || 'token 获取失败',
+        icon: 'none',
+      })
+    }
   }
 
   /**
