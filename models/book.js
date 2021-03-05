@@ -3,23 +3,23 @@ import { LikeModel } from './like'
 
 const likeModel = new LikeModel()
 
-class BookModel extends HTTP {
+class BookModel {
   getHotList() {
-    return this.request({
+    return HTTP.request({
       uri: `/book/hot`,
       method: 'GET',
     })
   }
 
   getDetail(id) {
-    return this.request({
+    return HTTP.request({
       uri: `/book/detail/${id}`,
       method: 'GET',
     })
   }
 
   getLike(id) {
-    return this.request({
+    return HTTP.request({
       uri: `/book/favor/${id}`,
       method: 'GET',
     })
@@ -34,14 +34,14 @@ class BookModel extends HTTP {
   }
 
   getShortComment(id) {
-    return this.request({
+    return HTTP.request({
       uri: `/book/short_comment/${id}`,
       method: 'GET',
     })
   }
 
   setShortComment({ artId, content }) {
-    return this.request({
+    return HTTP.request({
       uri: `/book/short_comment/add`,
       method: 'POST',
       data: {

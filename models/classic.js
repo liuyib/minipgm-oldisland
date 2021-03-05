@@ -3,9 +3,9 @@ import { LikeModel } from './like'
 
 const likeModel = new LikeModel()
 
-class ClassicModel extends HTTP {
+class ClassicModel {
   getLatest() {
-    return this.request({
+    return HTTP.request({
       uri: '/classic/latest',
       method: 'GET',
     })
@@ -30,7 +30,7 @@ class ClassicModel extends HTTP {
 
       return cache
     } else {
-      return this.request({
+      return HTTP.request({
         uri: `/classic/${index}/${isGetNext ? 'next' : 'prev'}`,
         method: 'GET',
       })

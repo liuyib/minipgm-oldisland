@@ -1,6 +1,6 @@
 import { HTTP } from '../utils/request'
 
-class TokenModel extends HTTP {
+class TokenModel {
   /**
    * 验证 Token
    * @api public
@@ -29,16 +29,15 @@ class TokenModel extends HTTP {
     wx.login({
       success(res) {
         if (res.code) {
-          _this
-            .request({
-              uri: '/token',
-              method: 'POST',
-              data: {
-                account: res.code,
-                // type: 100 表示小程序端登录
-                type: 100,
-              },
-            })
+          HTTP.request({
+            uri: '/token',
+            method: 'POST',
+            data: {
+              account: res.code,
+              // type: 100 表示小程序端登录
+              type: 100,
+            },
+          })
             .then((res) => {
               wx.setStorage({ key: 'token', data: res.data })
               _this._clearResendQueue()
@@ -64,7 +63,7 @@ class TokenModel extends HTTP {
    * @returns
    */
   verifyFromServer() {
-    this.request({
+    HTTP.request({
       uri: '/token/verify',
       method: 'POST',
       data: {
@@ -86,7 +85,7 @@ class TokenModel extends HTTP {
     while (resendQueue.length) {
       const req = resendQueue.shift()
 
-      this.wxrequest({
+      HTTP.wxrequest({
         ...req,
         isRefreshToken: false,
       })

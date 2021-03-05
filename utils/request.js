@@ -7,12 +7,12 @@ class HTTP {
   /**
    * 封装 wx.request
    * @api public
-   * @param 见 this.wxrequest
+   * @param 见 HTTP.wxrequest
    * @returns {Promise}
    */
-  request({ uri, method = 'GET', data = {}, isRefreshToken = true }) {
+  static request({ uri, method = 'GET', data = {}, isRefreshToken = true }) {
     return new Promise((resolve, reject) => {
-      this.wxrequest({
+      HTTP.wxrequest({
         uri,
         method,
         data,
@@ -35,7 +35,7 @@ class HTTP {
    * @param {Function} param.reject               - 失败的回调
    * @returns
    */
-  wxrequest({
+  static wxrequest({
     uri,
     method = 'GET',
     data = {},
@@ -53,7 +53,7 @@ class HTTP {
     const header = {
       'content-type': 'application/json',
       // HTTP Basic Auth 协议需要携带的请求头
-      Authorization: this._encode(),
+      Authorization: HTTP._encode(),
     }
     const { resendQueue } = getApp().globalData
     const reqTask = wx.request({
@@ -71,7 +71,7 @@ class HTTP {
           if (isRefreshToken) {
             // 本次加载中，第一个 403 的请求触发重新获取 token
             if (!resendQueue.length) {
-              this._refreshToken()
+              HTTP._refreshToken()
             }
 
             // 将授权失败的请求加入重发队列，等 token 成功获取后再重新发送
@@ -99,7 +99,7 @@ class HTTP {
       },
     })
 
-    this._uniqueReq(reqTask, { url, method })
+    HTTP._uniqueReq(reqTask, { url, method })
   }
 
   /**
@@ -107,7 +107,7 @@ class HTTP {
    * @api private
    * @returns {string}
    */
-  _encode() {
+  static _encode() {
     const token = wx.getStorageSync('token')
     const base64 = Base64.encode(`${token}:`)
     // Authorization: Basic base64(account:secret)
@@ -119,7 +119,7 @@ class HTTP {
    * @api private
    * @returns
    */
-  _refreshToken() {
+  static _refreshToken() {
     const tokenModel = new TokenModel()
     tokenModel.getFromServer()
   }
@@ -132,7 +132,7 @@ class HTTP {
    * @param {Object} param.method - 请求方法
    * @returns
    */
-  _uniqueReq(req, { url, method }) {
+  static _uniqueReq(req, { url, method }) {
     const { reqCache } = getApp().globalData
     const cacheKey = `url:${url},method:${method}`
     const cacheVal = reqCache.get(cacheKey)

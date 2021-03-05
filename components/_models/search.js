@@ -1,6 +1,6 @@
 import { HTTP } from '../../utils/request'
 
-class SearchModel extends HTTP {
+class SearchModel {
   getHotKeys() {
     return this.request({
       uri: `/book/hot_keyword`,
@@ -16,7 +16,7 @@ class SearchModel extends HTTP {
    * @param {number} param.count - 获取数量
    */
   getSearch({ q, start, count }) {
-    return this.request({
+    return HTTP.request({
       uri: `/book/search`,
       method: 'GET',
       data: {

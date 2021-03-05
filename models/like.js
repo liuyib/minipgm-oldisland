@@ -1,8 +1,8 @@
 import { HTTP } from '../utils/request'
 
-class LikeModel extends HTTP {
+class LikeModel {
   setLike({ uri, id, type }) {
-    return this.request({
+    return HTTP.request({
       uri,
       method: 'POST',
       data: {
@@ -13,7 +13,7 @@ class LikeModel extends HTTP {
   }
 
   getLike(uri) {
-    return this.request({
+    return HTTP.request({
       uri,
       method: 'GET',
     })
