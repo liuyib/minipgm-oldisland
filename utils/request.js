@@ -92,7 +92,7 @@ class HTTP {
           reject(err)
 
           wx.showToast({
-            title: String(err),
+            title: String(err.message || err.msg || err.errMsg || err),
             icon: 'none',
           })
         }
