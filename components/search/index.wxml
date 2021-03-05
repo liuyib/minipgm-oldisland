@@ -43,13 +43,11 @@
                 bind:myDetail="onItemClick"></v-book>
       </block>
 
+      <v-loading class="loading" wx:if="{{ moreLoading }}" />
       <text wx:if="{{ isAllLoaded }}" class="all-tip">没有更多数据了</text>
     </view>
   </scroll-view>
 
   <v-loading class="loading-center" wx:if="{{ searchLoading }}" />
-
-  <!--<v-loading class="loading" wx:if="{{ loadingCenter }}" /> -->
-
   <text wx:if="{{ isEmpty }}" class="empty-tip">没有搜索到书籍</text>
 </view>

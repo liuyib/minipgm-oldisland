@@ -35,6 +35,8 @@ Component({
     isLoadMoreLocked: false,
     // 是否已经加载全部数据
     isAllLoaded: false,
+    // 加载更多 Loading
+    moreLoading: false,
   },
 
   lifetimes: {
@@ -73,6 +75,7 @@ Component({
 
       if (!isAllLoaded) {
         this._setLoadMoreLock(true)
+        this._setMoreLoading(true)
         this._getSearch()
       }
     },
@@ -91,8 +94,9 @@ Component({
         })
         .catch(() => {})
         .finally(() => {
-          this._setLoading(false)
           this._setLoadMoreLock(false)
+          this._setLoading(false)
+          this._setMoreLoading(false)
         })
     },
 
@@ -148,6 +152,12 @@ Component({
     _setLoadMoreLock(val) {
       this.setData({
         isLoadMoreLocked: val,
+      })
+    },
+
+    _setMoreLoading(val) {
+      this.setData({
+        moreLoading: val,
       })
     },
 

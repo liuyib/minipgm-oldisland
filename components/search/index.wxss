@@ -63,7 +63,7 @@
 }
 
 .loading {
-  margin: 50rpx 0 50rpx 0;
+  margin: 40rpx auto;
 }
 
 .loading-center {
