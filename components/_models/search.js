@@ -1,13 +1,6 @@
 import { HTTP } from '../../utils/request'
 
 class SearchModel {
-  getHotKeys() {
-    return this.request({
-      uri: `/book/hot_keyword`,
-      method: 'GET',
-    })
-  }
-
   /**
    * 搜索书籍
    * @param {Object} param

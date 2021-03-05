@@ -7,7 +7,12 @@ Component({
   /**
    * 组件的属性列表
    */
-  properties: {},
+  properties: {
+    // 获取热搜关键词
+    getHotKeys: {
+      type: Function,
+    },
+  },
 
   /**
    * 组件的初始数据
@@ -200,7 +205,7 @@ Component({
     },
 
     async _getHotKeys() {
-      const res = await searchModel.getHotKeys()
+      const res = await this.data.getHotKeys()
       this.setData({ hotKeys: res.data })
     },
   },

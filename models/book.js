@@ -50,6 +50,13 @@ class BookModel {
       },
     })
   }
+
+  getHotKeys() {
+    return HTTP.request({
+      uri: `/book/hot_keyword`,
+      method: 'GET',
+    })
+  }
 }
 
 export { BookModel }

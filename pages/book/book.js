@@ -12,6 +12,8 @@ Page({
     books: [],
     // 是否正在搜索
     isSearching: false,
+
+    getHotKeys: bookModel.getHotKeys,
   },
 
   /**
