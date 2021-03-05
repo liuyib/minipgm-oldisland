@@ -93,6 +93,15 @@ Component({
 
     onConfirm(event) {
       const { value } = event.detail
+      const filteredVal = this._filterInput(value)
+
+      if (!filteredVal) {
+        wx.showToast({
+          title: '请输入汉字或英文字母',
+          icon: 'none',
+        })
+        return
+      }
 
       this._setResultShow(true)
       this._setQuery(value)
@@ -123,6 +132,15 @@ Component({
       this.triggerEvent('myItemClick', { ...event.detail }, {})
     },
 
+    _filterInput(val) {
+      let filteredVal = val.trim()
+
+      // 只允许输入汉字（/\p{sc=Han}/）和大小写英文字母
+      filteredVal = filteredVal.replace(/[^a-zA-Z\p{sc=Han}]/, '')
+
+      return filteredVal
+    },
+
     _getSearch() {
       const { getSearch, q, start } = this.data
 
@@ -141,6 +159,7 @@ Component({
     _setResult(res) {
       const { results } = this.data
       const { data, start, count, total } = res
+      // 计算下一次开始获取数据的索引
       const nextStart = start + count
       const isEmpty = count === 0 && total === 0
       const isAllLoaded = nextStart === total
@@ -148,7 +167,6 @@ Component({
       results.push(...data)
 
       this.setData({
-        // 计算下一次开始获取数据的索引
         start: nextStart,
         total,
         results,
