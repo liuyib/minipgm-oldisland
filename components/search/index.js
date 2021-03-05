@@ -60,13 +60,13 @@ Component({
       this._setResultShow(true)
       this._setQuery(value)
       this._setLoading(true)
-      this._getSearch()
       this._setHistory({ value })
+      this._getSearch()
     },
 
     onDelete() {
-      this._getHistory()
       this._setResultShow(false)
+      this._getHistory()
       this._clearResult()
     },
 
