@@ -1,6 +1,12 @@
 import { BookModel } from '../../models/book'
+import { HistoryModel } from '../../models/history'
 
 const bookModel = new BookModel()
+
+HistoryModel.init({
+  key: 'history-book-search',
+  maxLen: 10,
+})
 
 // pages/book/book.js
 Page({
@@ -12,9 +18,14 @@ Page({
     books: [],
     // 是否正在搜索
     isSearching: false,
-
+    // 获取热搜关键词
     getHotKeys: bookModel.getHotKeys,
+    // 获取搜索结果
     getSearch: bookModel.getSearch,
+    // 设置历史搜索关键词
+    setHistory: HistoryModel.setData,
+    // 获取历史搜索关键词
+    getHistory: HistoryModel.getData,
   },
 
   /**

@@ -4,12 +4,36 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    // 获取热搜关键词
+    /**
+     * 获取热搜关键词
+     * @returns {Promise}
+     */
     getHotKeys: {
       type: Function,
     },
-    // 获取搜索结果
+    /**
+     * 获取搜索结果
+     * @param {string} q     - 搜索关键词
+     * @param {number} start - 查询开始的索引
+     * @param {number} count - 要获取的数量
+     * @returns {Promise}
+     */
     getSearch: {
+      type: Function,
+    },
+    /**
+     * 存储数据到缓存
+     * @param {*} value - 要存储的值
+     * @returns
+     */
+    setHistory: {
+      type: Function,
+    },
+    /**
+     * 从缓存中取数据
+     * @returns {Array} - 存储的值
+     */
+    getHistory: {
       type: Function,
     },
   },
@@ -73,7 +97,7 @@ Component({
       this._setResultShow(true)
       this._setQuery(value)
       this._setLoading(true)
-      this._setHistory({ value })
+      this._setHistory(value)
       this._getSearch()
     },
 
@@ -173,30 +197,6 @@ Component({
       })
     },
 
-    _setHistory({ value, key = 'search-book-history', maxCount = 10 }) {
-      let keywords = wx.getStorageSync(key)
-
-      if (Array.isArray(keywords)) {
-        if (!keywords.includes(value)) {
-          keywords.unshift(value)
-
-          if (keywords.length > maxCount) {
-            keywords.length = maxCount
-          }
-        }
-      } else {
-        keywords = [value]
-      }
-
-      wx.setStorage({ key, data: keywords })
-    },
-
-    _getHistory(key = 'search-book-history') {
-      this.setData({
-        historyKeys: wx.getStorageSync(key),
-      })
-    },
-
     _setInputFocus(val) {
       this.setData({
         isInputFocus: val,
@@ -207,6 +207,23 @@ Component({
       const { getHotKeys } = this.data
       const res = await getHotKeys()
       this.setData({ hotKeys: res.data })
+    },
+
+    _setHistory(value) {
+      const { setHistory } = this.data
+
+      if (setHistory) {
+        setHistory(value)
+      }
+    },
+
+    _getHistory() {
+      const { getHistory } = this.data
+
+      if (getHistory) {
+        const historyKeys = getHistory()
+        this.setData({ historyKeys })
+      }
     },
   },
 })

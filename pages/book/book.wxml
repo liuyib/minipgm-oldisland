@@ -8,6 +8,7 @@
   </view>
 
   <v-search wx:if="{{ isSearching }}" getHotKeys="{{ getHotKeys }}" getSearch="{{ getSearch }}"
+            setHistory="{{ setHistory }}" getHistory="{{ getHistory }}"
             bind:myCancel="onToggleSearch" bind:myItemClick="onDetail" />
 
   <view wx:if="{{ !isSearching }}" class="sub-container">
