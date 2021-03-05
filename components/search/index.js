@@ -71,9 +71,9 @@ Component({
     },
 
     onGetMore() {
-      const { isAllLoaded } = this.data
+      const { isLoadMoreLocked, isAllLoaded } = this.data
 
-      if (!isAllLoaded) {
+      if (!isLoadMoreLocked && !isAllLoaded) {
         this._setLoadMoreLock(true)
         this._setMoreLoading(true)
         this._getSearch()
