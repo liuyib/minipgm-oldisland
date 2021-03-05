@@ -25,6 +25,8 @@ Component({
     hotKeys: [],
     // 历史搜索关键词
     historyKeys: [],
+    // 输入框是否聚焦
+    isInputFocus: false,
     // 是否确认搜索
     isConfirm: false,
     // 是否搜索不到数据
@@ -41,6 +43,7 @@ Component({
 
   lifetimes: {
     attached() {
+      this._setInputFocus(true)
       this._getHistory()
       this._getHotKeys()
     },
@@ -66,6 +69,7 @@ Component({
 
     onDelete() {
       this._setResultShow(false)
+      this._setInputFocus(true)
       this._getHistory()
       this._clearResult()
     },
@@ -182,6 +186,12 @@ Component({
     _getHistory(key = 'search-book-history') {
       this.setData({
         historyKeys: wx.getStorageSync(key),
+      })
+    },
+
+    _setInputFocus(val) {
+      this.setData({
+        isInputFocus: val,
       })
     },
 
