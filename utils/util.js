@@ -94,10 +94,10 @@ const promisify = (func) => {
     return func
   }
 
-  return (params = {}) => {
+  return (option = {}) => {
     return new Promise((resolve, reject) => {
-      func({
-        ...params,
+      const funcRet = func({
+        ...option,
         success(res) {
           resolve(res)
         },
@@ -105,6 +105,12 @@ const promisify = (func) => {
           reject(err)
         },
       })
+
+      if (option.signal) {
+        if (typeof funcRet.abort === 'function') {
+          option.signal.abort = () => funcRet.abort()
+        }
+      }
     })
   }
 }
