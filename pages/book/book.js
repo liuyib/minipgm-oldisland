@@ -14,6 +14,7 @@ Page({
     isSearching: false,
 
     getHotKeys: bookModel.getHotKeys,
+    getSearch: bookModel.getSearch,
   },
 
   /**

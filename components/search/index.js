@@ -1,7 +1,3 @@
-import { SearchModel } from '../_models/search'
-
-const searchModel = new SearchModel()
-
 // components/search/index.js
 Component({
   /**
@@ -10,6 +6,10 @@ Component({
   properties: {
     // 获取热搜关键词
     getHotKeys: {
+      type: Function,
+    },
+    // 获取搜索结果
+    getSearch: {
       type: Function,
     },
   },
@@ -100,10 +100,9 @@ Component({
     },
 
     _getSearch() {
-      const { q, start } = this.data
+      const { getSearch, q, start } = this.data
 
-      searchModel
-        .getSearch({ q, start, count: 20 })
+      getSearch({ q, start, count: 20 })
         .then((res) => {
           this._setResult(res)
         })
@@ -205,7 +204,8 @@ Component({
     },
 
     async _getHotKeys() {
-      const res = await this.data.getHotKeys()
+      const { getHotKeys } = this.data
+      const res = await getHotKeys()
       this.setData({ hotKeys: res.data })
     },
   },
