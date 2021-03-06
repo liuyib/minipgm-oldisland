@@ -1,5 +1,5 @@
 <!--components/button/index.wxml-->
-<button class="container" open-type="{{ openType }}" bind:getuserinfo="onGetUserInfo">
+<button class="container ext-class" open-type="{{ openType }}" bind:getuserinfo="onGetUserInfo">
   <block wx:if="{{ !isSlot }}">
     {{ text }}
   </block>

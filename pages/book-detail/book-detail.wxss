@@ -127,13 +127,13 @@
 }
 
 .share-btn {
-  margin-top: 28rpx;
-  margin-left: 10rpx;
+  margin-top: 21rpx;
+  margin-right: 15rpx;
 }
 
 .share {
-  width: 40rpx;
-  height: 40rpx;
+  width: 35rpx;
+  height: 35rpx;
 }
 
 .posting-container .comment-container {

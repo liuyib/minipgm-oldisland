@@ -4,6 +4,8 @@ Component({
     multipleSlots: true,
   },
 
+  externalClasses: ['ext-class'],
+
   /**
    * 组件的属性列表
    */

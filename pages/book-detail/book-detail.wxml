@@ -59,9 +59,9 @@
     <v-like class="like" isLike="{{ likeStatus }}" count="{{ likeNums }}"
             bind:myLike="onToggleLike" />
 
-    <!-- <img-btn-cmp class="share-btn" open-type="share">
-      <image class="share" slot="img" src="/assets/images/icon/share.png" />
-    </img-btn-cmp> -->
+    <v-button class="share-btn" isSlot="{{ true }}" openType="share">
+      <image class="share" slot="image" src="/assets/images/icon/share.png" />
+    </v-button>
   </view>
 </view>
 
