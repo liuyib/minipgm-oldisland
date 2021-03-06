@@ -1,1 +1,20 @@
 /* pages/my/my.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+}

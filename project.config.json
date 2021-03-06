@@ -68,6 +68,12 @@
         {
           "name": "pages/book/book",
           "pathName": "pages/book/book",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
           "scene": null
         }
       ]

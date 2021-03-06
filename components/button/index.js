@@ -8,11 +8,16 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    text: {
-      type: String,
-    },
     isSlot: {
       type: Boolean,
+      value: false,
+    },
+    text: {
+      type: String,
+      value: 'done',
+    },
+    openType: {
+      type: String,
     },
   },
 
@@ -24,5 +29,9 @@ Component({
   /**
    * 组件的方法列表
    */
-  methods: {},
+  methods: {
+    onGetUserInfo(event) {
+      this.triggerEvent('myGetUserInfo', event.detail, {})
+    },
+  },
 })

@@ -1,2 +1,7 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<view class="container">
+  <v-button class="avatar" isSlot="{{ isSlot }}" text="click me" openType="getUserInfo"
+            bind:myGetUserInfo="onGetUserInfo">
+    <image class="avatar-image" slot="image" src="{{ userInfo.avatarUrl }}" />
+  </v-button>
+</view>

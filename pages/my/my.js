@@ -3,7 +3,10 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    isSlot: false,
+    userInfo: {},
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -44,4 +47,23 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
+
+  onGetUserInfo(event) {
+    const { userInfo } = event.detail
+
+    this._setUserInfo(userInfo)
+    this._toggleIsSlot()
+  },
+
+  _setUserInfo(obj) {
+    this.setData({
+      userInfo: obj,
+    })
+  },
+
+  _toggleIsSlot() {
+    this.setData({
+      isSlot: !this.data.isSlot,
+    })
+  },
 })
