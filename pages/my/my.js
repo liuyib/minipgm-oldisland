@@ -5,7 +5,7 @@ Page({
    */
   data: {
     isSlot: false,
-    userInfo: {},
+    userInfo: null,
   },
 
   /**
@@ -62,8 +62,10 @@ Page({
   },
 
   _toggleIsSlot() {
-    this.setData({
-      isSlot: !this.data.isSlot,
-    })
+    const { userInfo, isSlot } = this.data
+
+    if (userInfo && isSlot) return
+
+    this.setData({ isSlot: !isSlot })
   },
 })
