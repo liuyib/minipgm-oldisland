@@ -65,7 +65,7 @@ const urlResolve = (base, ...paths) => {
  * @param {Object} option.ctx      - 上下文
  * @param {string} option.selector - 选择器
  * @param {Object} option.fields   - 指定获取的属性
- * @param {Object} option.ctx      - 返回值
+ * @param {Object} option.ret      - 返回值
  * @returns
  */
 const getDomInfo = ({ ctx, selector, fields = {}, ret }) => {
